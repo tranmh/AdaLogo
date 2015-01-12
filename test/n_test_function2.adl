@@ -1,0 +1,31 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+
+  function bla return integer;
+  function bla return integer is begin null; end;
+  
+  function bla return boolean;
+  function bla return boolean is begin null; end;
+  
+  function bla(a : integer := 10) return integer;
+  function bla(a : integer := 10) return integer is begin null; end;
+  
+  function bla(a : integer; b : integer; c: integer) return integer;
+  function bla(a : integer; b : integer; c: integer) return integer is begin null; end;
+
+ -- procedure blubb;
+  
+  
+begin
+  -- Hier steht das Programm.
+
+  null;
+end;

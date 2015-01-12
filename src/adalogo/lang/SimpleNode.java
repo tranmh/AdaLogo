@@ -161,14 +161,34 @@ public class SimpleNode implements Node {
     protected String value;
     protected int column = 0;
     protected int line = 0;
+    
+    protected String attribute = "";
 
     /**
      * Exception class, uses by SimpleNode.getValue()
      */
     public class SimpleNodeGetValueException extends RuntimeException {
-        public SimpleNodeGetValueException(String message) {
+		private static final long serialVersionUID = 1L;
+
+		public SimpleNodeGetValueException(String message) {
             super(message);
         }
+    }
+    
+    /**
+     * set attribute for the node
+     * @param attribute
+     */
+    public void setAttribute(String attribute) {
+    	this.attribute = attribute;
+    }
+    
+    /**
+     * get attribute of the node.
+     * @return String attribute
+     */
+    public String getAttribute() {
+    	return attribute;
     }
 
     /**

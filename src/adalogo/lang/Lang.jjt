@@ -19,11 +19,70 @@
  *
  */
 
-//TODO loop while for: loop block
-//procedure function declare: declare block
+//TODOlater
 //data types (remove boolean/integer declaration)
-//arrays
 //records
+
+// FIXME fixed? 
+// a : float := b + 10.0;
+
+// FIXME AssignmentStatement is ambiguous in compare with ProcedureCallStatement. Because of (AssignmentStatement)Identifier ?
+// FIXME a := b(1,2); --- fixed?
+
+// TODO
+// the using of arrays. fixed? see FunctionCallExpression (ambiguity)
+
+// TODO
+// records, pointer, string in the parsing part. fixed? 
+// later: in the semantic part.
+
+// TODO 
+// allocation and with new.
+// which method is implementing in ada?
+// tombstone, reference-counting, etc. ?
+
+// TODO later:
+// if a or b and c then ...  --> possible in AdaLogo, but not in Ada 
+// ada wants to have brakets. adalogo has priority-order: 
+// not->and->xor->or
+
+// TODO
+// when does ada use BOXING '<>' ???
+
+// TODO
+// loop can also loop in discrete structures:
+//   type a is (a, aa, aaa);
+//   for i in a..aaa loop // is in bnf
+// ** operator. (rechts-assoziativ)
+// bnf from package. // is in bnf
+
+// MCT
+// TO MANY CHANGES HERE!!!
+// TODO TEST TEST TEST
+// TODO TEST TEST TEST
+// TODO TEST TEST TEST
+
+// TODO in the SEMANTIC PART
+// # return at the right place and is visible and 
+//   a function have a return at a right place whatever 
+//   path you take
+// # seperate float and integer expression.
+// # special adalogo functions
+// # special other functions like convert from float to integer.
+//   cos, sin, tan
+// # check the semantic: function- and procedurecalls 
+//   have the same (length) of parameters
+// # check the semantic: array: OutOfRangeException
+// # ambiguity of ArrayExpression, FunctionCallExpression 
+//   and constant variable.
+// # overloading of functions and procedures? 
+//   how to solve this with the symtab
+// # how to illustrate an array in the VarMonitor --> hailang
+// # get --> lesmana
+// # turtle_down;
+// # random with both border, at the moment: only the left border is in.
+// # variable from a ForStatement cannot be manipulated, available at the moment.
+
 
 options {
   // JJ OPTIONS
@@ -36,7 +95,8 @@ options {
 
   CHOICE_AMBIGUITY_CHECK = 2;            // (default: 2)
   OTHER_AMBIGUITY_CHECK = 1;             // (default: 1)
-  OPTIMIZE_TOKEN_MANAGER = true;         // (default: ?)
+// not available in javacc-4.0:  
+//  OPTIMIZE_TOKEN_MANAGER = true;         // (default: ?)
   ERROR_REPORTING = true;                // (default: true)
   JAVA_UNICODE_ESCAPE = false;           // (default: false)
   UNICODE_INPUT = false;                 // (default: false)
@@ -126,49 +186,113 @@ SPECIAL_TOKEN :
 
 TOKEN [IGNORE_CASE] :
 {
-    <ADALOGO:       "adalogo">
-|   <AND:           "and">
+    <AND:           "and">
+|   <ARRAY:         "array">
 |   <BEGIN:         "begin">
 |   <BOOLEAN:       "boolean">
+|   <CHARACTER:     "character">
+|   <DECLARE:       "declare">
 |   <ELSE:          "else">
 |   <ELSIF:         "elsif">
 |   <END:           "end">
 |   <EXIT:          "exit">
 |   <FALSE:         "false">
+|   <FLOAT:         "float">
 |   <FOR:           "for">
-|   <FORWARD:       "forward">
-|   <GETDIR:        "turtle_dir">
-|   <GETX:          "turtle_x">
-|   <GETY:          "turtle_y">
+|   <FUNCTION:      "function">
 |   <IF:            "if">
 |   <IN:            "in">
 |   <INTEGER:       "integer">
 |   <IS:            "is">
-|   <JUMPTO:        "move_to">
 |   <LOOP:          "loop">
-|   <MAX:           "max">
-|   <MIN:           "min">
 |   <MOD:           "mod">
-|   <NEW_LINE:      "new_line">
 |   <NOT:           "not">
 |   <NULL:          "null">
+|   <OF:            "of">
 |   <OR:            "or">
-|   <PENDOWN:       "pen_down">
-|   <PENUP:         "pen_up">
+|   <OTHERS:        "others">
 |   <PROCEDURE:     "procedure">
-|   <PUT:           "put">
-|   <PUT_LINE:      "put_line">
-|   <RANDOM:        "random">
 |   <REM:           "rem">
-|   <RESETTURTLE:   "turtle_reset">
+|   <RETURN:        "return">
 |   <REVERSE:       "reverse">
+|   <STRING:        "string">
 |   <THEN:          "then">
 |   <TRUE:          "true">
-|   <TURN:          "turn">
-|   <TURNTO:        "turn_to">
 |   <WHILE:         "while">
 |   <WITH:          "with">
 |   <USE:           "use">
+
+// Ada95
+|	<ABORT:		"abort">
+|	<ABS:		"abs">
+|	<ABSTRACT:	"abstract">
+|	<ACCEPT:	"accept">
+|	<ACCESS:	"access">
+|	<ALIASED:	"aliased">
+|	<ALL:		"all">
+//|	<AND:		"and">
+//|	<ARRAY:		"array">
+|	<AT:		"at">
+//|	<BEGIN:		"begin">
+|	<BODY:		"body">
+|	<CASE:		"case">
+|	<CONSTANT:	"constant">
+//|	<DECLARE:	"declare">
+|	<DELAY:		"delay">
+|	<DELTA:		"delta">
+|	<DO:		"do">
+//|	<ELSE:		"else">
+//|	<ELSIF:		"elsif">
+//|	<END:		"end">
+|	<ENTRY:		"entry">
+|	<EXCEPTION:	"exception">
+//|	<EXIT:		"exit">
+//|	<FOR:		"for">
+//|	<FUNCTION:	"function">
+|	<GENERIC:	"generic">
+|	<GOTO:		"goto">
+//|	<IF:		"if">
+//|	<IN:		"in">
+//|	<IS:		"is">
+|	<LIMITED:	"limited">
+//|	<LOOP:		"loop">
+//|	<MOD:		"mod">
+|	<NEW:		"new">
+//|	<NOT:		"not">
+//|	<NULL:		"null">
+//|	<OF:		"of">
+//|	<OR:		"or">
+//|	<OTHERS:	"others">
+|	<OUT:		"out">
+|	<PACKAGE:	"package">
+|	<PRAGMA:	"pragma">
+|	<PRIVATE:	"private">
+//|	<PROCEDURE:	"procedure">
+|	<PROTECTED:	"protected">
+|	<RAISE:		"raise">
+|	<RANGE:		"range">
+|	<RECORD:	"record">
+//|	<REM:		"rem">
+|	<RENAMES:	"renames">
+|	<REQUEUE:	"requeue">
+//|	<RETURN:	"return">
+//|	<REVERSE:	"reverse">
+|	<SELECT:	"select">
+|	<SEPARATE:	"separate">
+|	<SUBTASK:	"subtask">
+|	<SUBTYPE:	"subtype">
+|	<TAGGED:	"tagged">
+|	<TASK:		"task">
+|	<TERMINATE:	"terminate">
+//|	<THEN:		"then">
+|	<TYPE:		"type">
+|	<UNTIL:		"until">
+//|	<USE:		"use">
+|	<WHEN:		"when">
+//|	<WHILE:		"while">
+//|	<WITH:		"with">
+|	<XOR:		"xor">
+
 }
 
 TOKEN :
@@ -176,6 +300,7 @@ TOKEN :
     <COLON:         ":">
 |   <COMMA:         ",">
 |   <DASH:          "-">
+|   <DOT:           ".">
 |   <DOT_DOT:       "..">
 |   <EQ:            "=">
 |   <GT:            ">">
@@ -186,10 +311,31 @@ TOKEN :
 |   <LT_EQ:         "<=">
 |   <NE:            "/=">
 |   <PLUS:          "+">
+|   <RIGHT_SHAFT:   "=>">
 |   <RPAREN:        ")">
 |   <SEMI:          ";">
 |   <SLASH:         "/">
 |   <STAR:          "*">
+
+// Ada95
+//|	<EQUAL:     "=">
+//|	<NE:        "/=">
+//|	<LT:        "<">
+//|	<LT_EQ:     "<=">
+//|	<GT:        ">">
+//|	<GE:        ">=">
+//|	<PLUS:      "+">
+//|	<DASH:      "-">
+|	<AMPERSAND: "&">
+//|	<STAR:      "*">
+//|	<SLASH:     "/">
+|	<EXPON:     "^">
+|	<LT_LT:     "<<">
+|	<GT_GT:     ">>">
+//|	<IS_ASSIGNED: ":=">
+|	<BAR:       "|">
+//|	<DOT:       ".">
+|   <TIC:       "'">
 
 }
 
@@ -198,18 +344,38 @@ TOKEN :
     <IDENTIFIER: ["A" - "Z","a" - "z","_"](["A" - "Z","a" - "z","_","0" - "9" ])* >
 |   <INTEGER_LITERAL: (["0"-"9"])+ >
 |   <STRING_LITERAL: "\"" (~["\""])* "\"" >
+|   <CHARACTER_LITERAL: "'" (~["'","\n","\r"]) "'" >
+    //TODO this is ok?
+|   <FLOAT_LITERAL: <INTEGER_LITERAL> <DOT> <INTEGER_LITERAL> 
+                    (["E","e"] (["+","-"])? <INTEGER_LITERAL> )? >  
 }
 
 SimpleNode CompilationUnit() :
 {}
 {
-    <WITH> <ADALOGO> <SEMI>
-    <USE>  <ADALOGO> <SEMI>
+    (   WithClause()
+    |   UseClause()
+    )*
 
-    ProcedureDeclaration() Semi() <EOF>
+    (   ProcedureDeclaration()
+    |   PackageDeclaration()
+    )
+    Semi() <EOF>
     {
         return jjtThis;
     }
+}
+
+void WithClause():
+{}
+{
+    <WITH> Identifier() ( <DOT> Identifier() )* Semi()	
+}
+
+void UseClause():
+{}
+{
+	<USE> Identifier() ( <DOT> Identifier() )* Semi()	
 }
 
 void Semi() :
@@ -229,8 +395,13 @@ void Declaration() :
 {}
 {
     (
-        (   VariableDeclaration()
-        |   ProcedureDeclaration()
+        (   
+            ProcedureDeclaration()
+        |   FunctionDeclaration() 
+        |   //LOOKAHEAD(3) 
+            VariableDeclaration()
+        //|   ArrayDeclaration() see VariableDeclaration
+        |   TypeDeclaration()
         ) Semi()
     )*
 }
@@ -240,54 +411,13 @@ void ProcedureDeclaration() :
     Token t;
 }
 {
-    t = <PROCEDURE> ProcedureDeclarationIdentifier() (ProcedureDeclarationParameters())? <IS>
+    t = <PROCEDURE> Identifier() (DeclarationParameters())?
+    (
+    <IS>
         Declaration()
     <BEGIN>
         SequenceOfStatement()
     <END>
-    {
-        jjtThis.setValue(t.image);
-        jjtThis.setLine(t.beginLine);
-        jjtThis.setColumn(t.beginColumn);
-    }
-}
-
-void ProcedureDeclarationIdentifier():
-{
-    Token t;
-}
-{
-    t = <IDENTIFIER>
-    {
-        jjtThis.setValue(t.image);
-        jjtThis.setLine(t.beginLine);
-        jjtThis.setColumn(t.beginColumn);
-    }
-}
-
-
-void ProcedureDeclarationParameters() :
-{}
-{
-    <LPAREN>
-    ( VariableDeclaration() )
-    ( Semi() ( VariableDeclaration() ) )*
-    <RPAREN>
-}
-
-
-void VariableDeclaration() :
-{
-    Token t;
-}
-{
-    VariableDeclarationIdentifier() t = <COLON>
-    (
-        <BOOLEAN> #BooleanDeclarationNode
-    |   <INTEGER> #IntegerDeclarationNode
-    )
-    (
-        <IS_ASSIGNED> BooleanExpression()
     )?
     {
         jjtThis.setValue(t.image);
@@ -296,7 +426,26 @@ void VariableDeclaration() :
     }
 }
 
-void VariableDeclarationIdentifier():
+void PackageDeclaration() :
+{}
+{
+    <PACKAGE> (Body())? Identifier() <IS>
+        Declaration()
+    <BEGIN>
+        SequenceOfStatement()
+    <END>
+}
+
+void Body() :
+{}
+{
+	<BODY>
+}
+
+//-----------------------------------------------------------------------------
+//general identifier, for everything
+//-----------------------------------------------------------------------------
+void Identifier():
 {
     Token t;
 }
@@ -309,80 +458,293 @@ void VariableDeclarationIdentifier():
     }
 }
 
+void DeclarationParameters() :
+{}
+{
+    <LPAREN>
+    Parameter() ( <SEMI> Parameter() )*
+    <RPAREN>
+}
+
+// TODO: Filter <IN> <OUT> later! (-> functions)
+//     : Filter default-values later (only possible without <OUT>)
+void Parameter() :
+{
+    Token t;
+}
+{
+	Identifier() ( <COMMA> Identifier() )*
+    t = <COLON> (ParameterMode())?
+    Type()
+    (
+        <IS_ASSIGNED>
+        TypeExpression()
+    )?
+    {
+        jjtThis.setValue(t.image);
+        jjtThis.setLine(t.beginLine);
+        jjtThis.setColumn(t.beginColumn);
+    }
+}
+
+void ParameterMode():
+{}
+{
+        In() (Out())? 
+    |   Out()
+}
+
+void In():
+{}
+{
+    <IN>
+}
+
+void Out():
+{}
+{
+    <OUT>
+}
+
+void Type() :
+{}
+{
+    (   Identifier()
+    |   Boolean()
+    |   Character()
+    |   Float()
+    |   Integer()
+    |   String()
+    )
+}
+
+void TypeExpression() :
+{}
+{
+        BooleanExpression()
+    |   CharacterLiteral()
+    |   StringLiteral()
+}
+
+void Boolean() : 
+{
+    Token t;	
+}
+{
+    t = <BOOLEAN>
+    
+    {
+        jjtThis.setValue(t.image);
+        jjtThis.setLine(t.beginLine);
+        jjtThis.setColumn(t.beginColumn);
+    }
+}
+
+void Character():
+{
+    Token t;	
+}
+{
+	t = <CHARACTER>	
+    {
+        jjtThis.setValue(t.image);
+        jjtThis.setLine(t.beginLine);
+        jjtThis.setColumn(t.beginColumn);
+    }
+}
+
+void Float() :
+{
+    Token t;	
+}
+{
+    t = <FLOAT>
+    {
+        jjtThis.setValue(t.image);
+        jjtThis.setLine(t.beginLine);
+        jjtThis.setColumn(t.beginColumn);
+    }
+}
+
+void Integer() :
+{
+    Token t;	
+}
+{
+    t = <INTEGER>
+    {
+        jjtThis.setValue(t.image);
+        jjtThis.setLine(t.beginLine);
+        jjtThis.setColumn(t.beginColumn);
+    }
+}
+
+void String() :
+{
+    Token t;	
+}
+{
+    t = <STRING>
+    {
+        jjtThis.setValue(t.image);
+        jjtThis.setLine(t.beginLine);
+        jjtThis.setColumn(t.beginColumn);
+    }
+}
+
+void FunctionDeclaration() :
+{
+    Token t;
+}
+{
+    t = <FUNCTION> Identifier() (DeclarationParameters())? 
+        <RETURN> Type()
+    (
+    <IS>
+        Declaration()
+    <BEGIN>
+        SequenceOfStatement()
+    <END>
+    )?
+    {
+        jjtThis.setValue(t.image);
+        jjtThis.setLine(t.beginLine);
+        jjtThis.setColumn(t.beginColumn);
+    }
+}
+
+void VariableDeclaration() :
+{
+    Token t;
+}
+{
+    Identifier() 
+    ( <COMMA> Identifier() )* 
+    t = <COLON>
+    (
+        Type()
+        (
+            <IS_ASSIGNED>
+            TypeExpression()
+        )?
+    |   ArrayDeclaration()
+    )
+    
+    {
+        jjtThis.setValue(t.image);
+        jjtThis.setLine(t.beginLine);
+        jjtThis.setColumn(t.beginColumn);
+    }
+}
+
+// TODO check this again.
+void ArrayDeclaration():
+{
+    Token t;	
+}
+{
+	//Identifier()
+    //( <COMMA> Identifier() )*  // ambiguity with VariableDeclaration
+    //t = <COLON>
+    <ARRAY> 
+    <LPAREN>
+    IntegerExpression()
+    <DOT_DOT>
+    IntegerExpression()
+    (
+        <COMMA>
+        IntegerExpression()
+        <DOT_DOT>
+        IntegerExpression()
+    )*
+    <RPAREN>
+    <OF>
+    Type()
+    (
+    <IS_ASSIGNED> 
+        (
+	        Identifier()
+	    |   ArrayDeclarationOthers()
+	    )
+    )?    
+}
+
+void ArrayDeclarationOthers():
+{}
+{
+    <LPAREN>  
+    <OTHERS> 
+    <RIGHT_SHAFT>
+    (
+    	LOOKAHEAD(2)
+    	TypeExpression()
+	|   ArrayDeclarationOthers()    
+    )
+    <RPAREN>
+}
+
+void TypeDeclaration() :
+{}
+{
+	<TYPE> Identifier()
+    (
+        <IS>
+        (
+            PointerDeclaration()
+        |   DiscreteDeclaration()
+        |   RecordDeclaration()
+        )
+    )?
+}
+
+void PointerDeclaration() : 
+{}
+{
+    <ACCESS> Type() 
+}
+
+void DiscreteDeclaration() :
+{}
+{
+	<LPAREN> Identifier() (<COMMA> Identifier())* <RPAREN>
+}
+
+void RecordDeclaration() :
+{}
+{
+    <RECORD> ( VariableDeclaration() Semi() )+ <END> <RECORD>
+|   <NULL> <RECORD>
+}
+
 void SequenceOfStatement() :
 {}
 {
     (
         (
-            ForwardStatement()
-        |   JumpToStatement()
-        |   NewLineStatement()
-        |   PenDownStatement()
-        |   PenUpStatement()
-        |   PutLineStatement()
-        |   PutStatement()
-        |   ResetTurtleStatement()
-        |   TurnStatement()
-        |   TurnToStatement()
-        |   LOOKAHEAD(2)
-            AssignmentStatement()
+            // this is because of ProcedureCallStatement 
+            //AssignmentStatement() 
+      //|   
+            CaseStatement()
+        |   DeclareBlock()    
         |   ExitStatement()
         |   ForStatement()
         |   IfStatement()
         |   LoopStatement()
         |   NullStatement()
         |   ProcedureCallStatement()
+        |   ReturnStatement()
         |   WhileStatement()
         )
         Semi()
     )+
 }
 
-//-----------------------------------------------------------------------------
-// AdaLogo Statements
-//-----------------------------------------------------------------------------
-
-void ForwardStatement() :
-{}
-{
-    <FORWARD> <LPAREN> IntegerExpression() <RPAREN>
-}
-
-void JumpToStatement():
-{}
-{
-    <JUMPTO> <LPAREN> IntegerExpression() <COMMA> IntegerExpression() <RPAREN>
-}
-
-void NewLineStatement() :
-{}
-{
-    <NEW_LINE>
-}
-
-void PenDownStatement() :
-{}
-{
-    <PENDOWN>
-}
-
-void PenUpStatement() :
-{}
-{
-    <PENUP>
-}
-
-void PutLineStatement() :
+void CharacterLiteral() :
 {
     Token t;
 }
 {
-    t = <PUT_LINE> <LPAREN>
-    (
-        BooleanExpression()
-    |   StringLiteral()
-    )
-    <RPAREN>
+    t = <CHARACTER_LITERAL>
     {
         jjtThis.setValue(t.image);
         jjtThis.setLine(t.beginLine);
@@ -390,23 +752,6 @@ void PutLineStatement() :
     }
 }
 
-void PutStatement() :
-{
-    Token t;
-}
-{
-    t = <PUT> <LPAREN>
-    (
-        BooleanExpression()
-    |   StringLiteral()
-    )
-    <RPAREN>
-    {
-        jjtThis.setValue(t.image);
-        jjtThis.setLine(t.beginLine);
-        jjtThis.setColumn(t.beginColumn);
-    }
-}
 
 void StringLiteral() :
 {
@@ -421,25 +766,6 @@ void StringLiteral() :
     }
 }
 
-void ResetTurtleStatement() :
-{}
-{
-    <RESETTURTLE>
-}
-
-void TurnStatement() :
-{}
-{
-    <TURN> <LPAREN> IntegerExpression() <RPAREN>
-}
-
-void TurnToStatement() :
-{}
-{
-    <TURNTO> <LPAREN> IntegerExpression() <RPAREN>
-}
-
-
 //-----------------------------------------------------------------------------
 // assignment
 //-----------------------------------------------------------------------------
@@ -449,7 +775,14 @@ void AssignmentStatement():
     Token t;
 }
 {
-    AssignmentIdentifier() t = <IS_ASSIGNED> BooleanExpression()
+	/* see procedurecallstatement
+	Identifier() 
+	(
+	    <LPAREN> IntegerExpression() ( <COMMA> IntegerExpression() )* <RPAREN>
+	)?
+	*/ 
+    t = <IS_ASSIGNED>
+    TypeExpression()
     {
         jjtThis.setValue(t.image);
         jjtThis.setLine(t.beginLine);
@@ -457,17 +790,47 @@ void AssignmentStatement():
     }
 }
 
-void AssignmentIdentifier():
+void CaseStatement(): 
+{}
+{
+    <CASE> Identifier()( <DOT> Identifier() )* <IS>
+    (    
+        LOOKAHEAD(2) 
+        <WHEN> CaseValues() <RIGHT_SHAFT> 
+        SequenceOfStatement() 
+    )*
+    (   <WHEN> <OTHERS> <RIGHT_SHAFT> 
+        SequenceOfStatement() 
+    )?
+    <END> <CASE>
+}
+
+// FIXME
+void CaseValues():
+{}
+{
+	(
+        BooleanExpression()
+        (<DOT_DOT> BooleanExpression())? 
+    )
+    (   <BAR> 
+        (
+            BooleanExpression()
+            (<DOT_DOT> BooleanExpression())?
+        )
+    )*
+}
+
+//-----------------------------------------------------------------------------
+// DeclareBlock
+//-----------------------------------------------------------------------------
+
+void DeclareBlock():
 {
     Token t;
 }
 {
-    t = <IDENTIFIER>
-    {
-        jjtThis.setValue(t.image);
-        jjtThis.setLine(t.beginLine);
-        jjtThis.setColumn(t.beginColumn);
-    }
+    t = <DECLARE> Declaration() <BEGIN> SequenceOfStatement() <END>
 }
 
 //-----------------------------------------------------------------------------
@@ -475,20 +838,11 @@ void AssignmentIdentifier():
 //-----------------------------------------------------------------------------
 
 void ExitStatement():
-{}
-{
-    <EXIT>
-}
-
-void ForStatement():
 {
     Token t;
 }
 {
-    t = <FOR> ForIdentifier() <IN> (ForReverse())? IntegerExpression() <DOT_DOT> IntegerExpression()
-    <LOOP>
-        SequenceOfStatement()
-    <END> <LOOP>
+    t = <EXIT>
     {
         jjtThis.setValue(t.image);
         jjtThis.setLine(t.beginLine);
@@ -496,12 +850,13 @@ void ForStatement():
     }
 }
 
-void ForIdentifier():
+void ForStatement():
 {
     Token t;
 }
 {
-    t = <IDENTIFIER>
+    t = <FOR> Identifier() <IN> (ForReverse())? IntegerExpression() <DOT_DOT> IntegerExpression()
+    LoopStatement()
     {
         jjtThis.setValue(t.image);
         jjtThis.setLine(t.beginLine);
@@ -584,30 +939,29 @@ void LoopStatement():
 void ProcedureCallStatement():
 {}
 {
-    ProcedureCallStatementIdentifier()
-    (ProcedureCallStatementParameters())?
+    Identifier()
+    (CallParameters())?
+    // FIXME
+    //(<DOT> Identifier() )*
+    (AssignmentStatement())?  
+    // TRICKY!
+    // because of the same head of 
+    // procedurecallstatement and assignmentstatement
 }
 
-void ProcedureCallStatementIdentifier():
-{
-    Token t;
-}
-{
-    t = <IDENTIFIER>
-    {
-        jjtThis.setValue(t.image);
-        jjtThis.setLine(t.beginLine);
-        jjtThis.setColumn(t.beginColumn);
-    }
-}
-
-void ProcedureCallStatementParameters():
+void CallParameters():
 {}
 {
     <LPAREN>
-    ( BooleanExpression() )
-    ( <COMMA> ( BooleanExpression() ) )*
+    TypeExpression()
+    ( <COMMA> TypeExpression() )*
     <RPAREN>
+}
+
+void ReturnStatement():
+{}
+{
+    <RETURN> (TypeExpression())?
 }
 
 void WhileStatement():
@@ -616,27 +970,7 @@ void WhileStatement():
 }
 {
     t = <WHILE> BooleanExpression()
-    <LOOP>
-        SequenceOfStatement()
-    <END> <LOOP>
-    {
-        jjtThis.setValue(t.image);
-        jjtThis.setLine(t.beginLine);
-        jjtThis.setColumn(t.beginColumn);
-    }
-}
-
-
-//-----------------------------------------------------------------------------
-// general identifier, for boolean and integer
-//-----------------------------------------------------------------------------
-
-void Identifier():
-{
-    Token t;
-}
-{
-    t = <IDENTIFIER>
+    LoopStatement()
     {
         jjtThis.setValue(t.image);
         jjtThis.setLine(t.beginLine);
@@ -657,11 +991,21 @@ void BooleanExpression() #void:
 void OrExpression() #void:
 {}
 {
-    AndExpression()
+    XorExpression()
     (
-        <OR> AndExpression() #OrNode(2)
+        <OR> XorExpression() #OrNode(2)
     )*
 }
+
+void XorExpression() #void:
+{}
+{
+    AndExpression()
+    (
+        <XOR> AndExpression() #XorNode(2)
+    )*
+}
+
 
 void AndExpression() #void:
 {}
@@ -680,13 +1024,17 @@ void UnaryBooleanExpression() #void:
         LOOKAHEAD(3)
         EqualityExpression()
     |   BooleanLiteral()
-    |   <LPAREN> BooleanExpression() <RPAREN>
+    |   LOOKAHEAD(3) 
+        <LPAREN> BooleanExpression() <RPAREN>
+    |   FunctionCallExpression()
     )   #NotNode(1)
 
 |   LOOKAHEAD(3)
     EqualityExpression()
 |   BooleanLiteral()
-|   <LPAREN> BooleanExpression() <RPAREN>
+|   LOOKAHEAD(3)
+    <LPAREN> BooleanExpression() <RPAREN>
+|   FunctionCallExpression()
 }
 
 
@@ -711,7 +1059,7 @@ void RelationalExpression() #void:
     |   <LT_EQ> IntegerExpression() #LessEqualNode(2)
     )?
 }
-
+	
 void BooleanLiteral() #void:
 {}
 {
@@ -758,26 +1106,15 @@ void UnaryIntegerExpression() #void:
     <DASH>
     (
         IntegerLiteral()
+    |   FloatLiteral()    
     |   <LPAREN> IntegerExpression() <RPAREN>
-    |   MinExpression()
-    |   MaxExpression()
-    |   RandomExpression()
-    |   GetDirExpression()
-    |   GetXExpression()
-    |   GetYExpression()
-    |   Identifier()
+    |   FunctionCallExpression()
     ) #DashNode(1)
 
 |   IntegerLiteral()
+|   FloatLiteral()
 |   <LPAREN> IntegerExpression() <RPAREN>
-|   MinExpression()
-|   MaxExpression()
-|   RandomExpression()
-|   GetDirExpression()
-|   GetXExpression()
-|   GetYExpression()
-|   Identifier()
-
+|   FunctionCallExpression()
 }
 
 void IntegerLiteral():
@@ -788,45 +1125,28 @@ void IntegerLiteral():
     t = <INTEGER_LITERAL>
     {
         jjtThis.setValue(t.image);
+        jjtThis.setLine(t.beginLine);
+        jjtThis.setColumn(t.beginColumn);
     }
 }
 
-//-----------------------------------------------------------------------------
-//pseudo functions
-//-----------------------------------------------------------------------------
-
-void MinExpression():
-{}
+void FloatLiteral():
 {
-    <MIN> <LPAREN> IntegerExpression() <COMMA> IntegerExpression() <RPAREN>
+    Token t;
+}
+{
+    t = <FLOAT_LITERAL>
+    {
+        jjtThis.setValue(t.image);
+    }
 }
 
-void MaxExpression():
+// FIXME
+void FunctionCallExpression():
 {}
 {
-    <MAX> <LPAREN> IntegerExpression() <COMMA> IntegerExpression() <RPAREN>
-}
-
-void GetDirExpression():
-{}
-{
-    <GETDIR>
-}
-
-void GetXExpression():
-{}
-{
-    <GETX>
-}
-
-void GetYExpression():
-{}
-{
-    <GETY>
-}
-
-void RandomExpression():
-{}
-{
-    <RANDOM> <LPAREN> IntegerExpression() <COMMA> IntegerExpression() <RPAREN>
+    Identifier()
+    (   CallParameters()
+    |   ( <DOT> Identifier() )+
+    )?
 }

@@ -1,0 +1,33 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  -- Hier werden Variablen, Funktionen
+  -- oder Prozeduren deklariert.
+--  function turtle_pen_down return boolean;
+--  function turtle_dir return integer;
+--  function turtle_dir return float;
+--  function turtle_x return integer;
+--  function turtle_x return float;
+--  function turtle_y return integer;
+--  function turtle_y return float;
+  
+--  function sin(a : float) return float;
+--  function cos(a : float) return float;
+--  function tan(a : float) return float;
+--  function to_integer(a : float) return integer;
+--  function to_float(a : integer) return float;
+--  function random(a : integer; b : integer) return integer;
+--  function random(a : float; b : float) return float;
+
+begin
+  -- Hier steht das Programm.
+
+  null;
+end;

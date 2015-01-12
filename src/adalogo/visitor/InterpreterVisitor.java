@@ -29,75 +29,80 @@ import adalogo.gui.Console;
 import adalogo.gui.StatusBar;
 import adalogo.lang.ASTAdditionNode;
 import adalogo.lang.ASTAndNode;
-import adalogo.lang.ASTAssignmentIdentifier;
+import adalogo.lang.ASTArrayDeclaration;
+import adalogo.lang.ASTArrayDeclarationOthers;
 import adalogo.lang.ASTAssignmentStatement;
-import adalogo.lang.ASTBooleanDeclarationNode;
+import adalogo.lang.ASTBody;
+import adalogo.lang.ASTBoolean;
+import adalogo.lang.ASTCallParameters;
+import adalogo.lang.ASTCaseStatement;
+import adalogo.lang.ASTCaseValues;
+import adalogo.lang.ASTCharacter;
+import adalogo.lang.ASTCharacterLiteral;
 import adalogo.lang.ASTCompilationUnit;
 import adalogo.lang.ASTDashNode;
 import adalogo.lang.ASTDeclaration;
+import adalogo.lang.ASTDeclarationParameters;
+import adalogo.lang.ASTDeclareBlock;
+import adalogo.lang.ASTDiscreteDeclaration;
 import adalogo.lang.ASTDivisionNode;
 import adalogo.lang.ASTElsePart;
 import adalogo.lang.ASTElsifPart;
 import adalogo.lang.ASTEqualNode;
 import adalogo.lang.ASTExitStatement;
 import adalogo.lang.ASTFalseNode;
-import adalogo.lang.ASTForIdentifier;
+import adalogo.lang.ASTFloat;
+import adalogo.lang.ASTFloatLiteral;
 import adalogo.lang.ASTForReverse;
 import adalogo.lang.ASTForStatement;
-import adalogo.lang.ASTForwardStatement;
-import adalogo.lang.ASTGetDirExpression;
-import adalogo.lang.ASTGetXExpression;
-import adalogo.lang.ASTGetYExpression;
+import adalogo.lang.ASTFunctionCallExpression;
+import adalogo.lang.ASTFunctionDeclaration;
 import adalogo.lang.ASTGreaterEqualNode;
 import adalogo.lang.ASTGreaterThanNode;
 import adalogo.lang.ASTIdentifier;
 import adalogo.lang.ASTIfStatement;
-import adalogo.lang.ASTIntegerDeclarationNode;
+import adalogo.lang.ASTIn;
+import adalogo.lang.ASTInteger;
 import adalogo.lang.ASTIntegerLiteral;
-import adalogo.lang.ASTJumpToStatement;
 import adalogo.lang.ASTLessEqualNode;
 import adalogo.lang.ASTLessThanNode;
 import adalogo.lang.ASTLoopStatement;
-import adalogo.lang.ASTMaxExpression;
-import adalogo.lang.ASTMinExpression;
 import adalogo.lang.ASTModNode;
 import adalogo.lang.ASTMultiplicationNode;
-import adalogo.lang.ASTNewLineStatement;
 import adalogo.lang.ASTNotEqualNode;
 import adalogo.lang.ASTNotNode;
 import adalogo.lang.ASTNullStatement;
 import adalogo.lang.ASTOrNode;
-import adalogo.lang.ASTPenDownStatement;
-import adalogo.lang.ASTPenUpStatement;
+import adalogo.lang.ASTOut;
+import adalogo.lang.ASTPackageDeclaration;
+import adalogo.lang.ASTParameter;
+import adalogo.lang.ASTParameterMode;
+import adalogo.lang.ASTPointerDeclaration;
 import adalogo.lang.ASTProcedureCallStatement;
-import adalogo.lang.ASTProcedureCallStatementIdentifier;
-import adalogo.lang.ASTProcedureCallStatementParameters;
 import adalogo.lang.ASTProcedureDeclaration;
-import adalogo.lang.ASTProcedureDeclarationIdentifier;
-import adalogo.lang.ASTProcedureDeclarationParameters;
-import adalogo.lang.ASTPutLineStatement;
-import adalogo.lang.ASTPutStatement;
-import adalogo.lang.ASTRandomExpression;
+import adalogo.lang.ASTRecordDeclaration;
 import adalogo.lang.ASTRemNode;
-import adalogo.lang.ASTResetTurtleStatement;
+import adalogo.lang.ASTReturnStatement;
 import adalogo.lang.ASTSemi;
 import adalogo.lang.ASTSequenceOfStatement;
+import adalogo.lang.ASTString;
 import adalogo.lang.ASTStringLiteral;
 import adalogo.lang.ASTSubtractionNode;
 import adalogo.lang.ASTTrueNode;
-import adalogo.lang.ASTTurnStatement;
-import adalogo.lang.ASTTurnToStatement;
+import adalogo.lang.ASTType;
+import adalogo.lang.ASTTypeDeclaration;
+import adalogo.lang.ASTTypeExpression;
+import adalogo.lang.ASTUseClause;
 import adalogo.lang.ASTVariableDeclaration;
-import adalogo.lang.ASTVariableDeclarationIdentifier;
 import adalogo.lang.ASTWhileStatement;
+import adalogo.lang.ASTWithClause;
+import adalogo.lang.ASTXorNode;
 import adalogo.lang.LangVisitor;
 import adalogo.lang.SimpleNode;
 
 //TODO a procedure defining at the point ealier can not see the a procedure
 //the point later. It is not easy to fix this, changing the grammar etc.
-
-//TODO implements a small browser in AdaLogo/help/help for showing helpsite
-//http://adalogo.cuong.net -> java.net
+// is implemented in the parsing part.
 
 /**
  * This is the heart of the interpreter in AdaLogo.
@@ -116,8 +121,15 @@ public class InterpreterVisitor implements LangVisitor {
 
     private static final String BOOLEAN = "boolean";
     private static final String INTEGER = "integer";
+    private static final String FLOAT = "float";
     private static final String PROCEDURE = "procedure";
+    private static final String FUNCTION = "function";
     private static final String BLOCK = "block";
+    
+    private static final String PROTECTED_BOOLEAN = "#boolean";
+    private static final String PROTECTED_INTEGER = "#integer";
+    private static final String PROTECTED_FLOAT = "#float";
+    
 
     /**
      * this one is for just checking the semantic.
@@ -211,7 +223,7 @@ public class InterpreterVisitor implements LangVisitor {
 
 
     /**
-     * InterpreterVisitorException
+     * InterpreterAbortException
      * nothing special here.
      */
     public class InterpreterAbortException extends RuntimeException {
@@ -235,7 +247,7 @@ public class InterpreterVisitor implements LangVisitor {
     }
 
     /**
-     * IntegerIdentifierException
+     * WrongNumberOfChildrenException
      * nothing special here.
      */
     public class WrongNumberOfChildrenException extends RuntimeException {
@@ -271,7 +283,7 @@ public class InterpreterVisitor implements LangVisitor {
     }
 
     /**
-     * WrongIntegerExpressionException
+     * AdaLogoSyntaxSemanticException
      * nothing special here.
      */
     public class AdaLogoSyntaxSemanticException extends RuntimeException {
@@ -279,30 +291,6 @@ public class InterpreterVisitor implements LangVisitor {
 
         public AdaLogoSyntaxSemanticException(String message) {
             super(message);
-        }
-    }
-
-    /**
-     * Get the parse tree and return true, if ExitStatement is the right place,
-     * otherwise false.
-     */
-    private boolean checkingExitStatementAtWrongPlace(SimpleNode node) {
-        boolean check = true;
-
-        if (node.toString() == "ExitStatement") {
-            return false;
-        }
-        else if (node.toString() == "ForStatement" |
-                node.toString() == "LoopStatement" |
-                node.toString() == "WhileStatement") {
-            return true;
-        }
-        else {
-            for (int i = 0; i < node.jjtGetNumChildren(); i++) {
-                SimpleNode childI = (SimpleNode)(node.jjtGetChild(i));
-                check = check & checkingExitStatementAtWrongPlace(childI);
-            }
-            return check;
         }
     }
 
@@ -440,41 +428,42 @@ public class InterpreterVisitor implements LangVisitor {
      * Take the children and go down.
      */
     public Object visit(ASTCompilationUnit node, Object data) {
-        if (!checkingExitStatementAtWrongPlace((SimpleNode)node)) {
-            throw new ExitStatementException("");
+    	int numChildren;
+    	numChildren = node.jjtGetNumChildren();
+
+        SimpleNode childProc = (SimpleNode)(node.jjtGetChild(numChildren-2));
+
+        if (childProc.jjtGetNumChildren() == 3) {
+            SimpleNode childProc_1, childProc_2, childProc_3;
+            childProc_1 = (SimpleNode)(childProc.jjtGetChild(0)); // Identifier()
+            childProc_2 = (SimpleNode)(childProc.jjtGetChild(1)); // Declaration()
+            childProc_3 = (SimpleNode)(childProc.jjtGetChild(2)); // SequenceOfStatement()
+
+            symtab.put(new String ("procedure " + childProc_1.getValue().toLowerCase()),BLOCK,childProc_1.getValue().toLowerCase());
+            symtab.put(childProc_1.getValue().toLowerCase(),PROCEDURE,node);
+
+            childProc_2.jjtAccept(this,data);
+            childProc_3.jjtAccept(this,data);
         }
+        else if (childProc.jjtGetNumChildren() == 4) {
+            SimpleNode childProc_1, childProc_2, childProc_3, childProc_4;
+            childProc_1 = (SimpleNode)(childProc.jjtGetChild(0)); // Identifier()
+            childProc_2 = (SimpleNode)(childProc.jjtGetChild(1)); // DeclarationParameters()
+            childProc_3 = (SimpleNode)(childProc.jjtGetChild(2)); // Declaration()
+            childProc_4 = (SimpleNode)(childProc.jjtGetChild(3)); // SequenceOfStatement()
 
-        SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
+            symtab.put(new String ("procedure " + childProc_1.getValue().toLowerCase()),BLOCK,childProc_1.getValue().toLowerCase());
+            symtab.put(childProc_1.getValue().toLowerCase(),PROCEDURE,node);
 
-        if (child1.jjtGetNumChildren() == 3) {
-            SimpleNode child1_1, child1_2, child1_3;
-            child1_1 = (SimpleNode)(child1.jjtGetChild(0));
-            child1_2 = (SimpleNode)(child1.jjtGetChild(1));
-            child1_3 = (SimpleNode)(child1.jjtGetChild(2));
-
-            symtab.put(new String ("procedure " + child1_1.getValue().toLowerCase()),BLOCK,child1_1.getValue().toLowerCase());
-            symtab.put(child1_1.getValue().toLowerCase(),PROCEDURE,node);
-
-            child1_2.jjtAccept(this,data);
-            child1_3.jjtAccept(this,data);
-        }
-        else if (child1.jjtGetNumChildren() == 4) {
-            SimpleNode child1_1, child1_2, child1_3, child1_4;
-            child1_1 = (SimpleNode)(child1.jjtGetChild(0));
-            child1_2 = (SimpleNode)(child1.jjtGetChild(1));
-            child1_3 = (SimpleNode)(child1.jjtGetChild(2));
-            child1_4 = (SimpleNode)(child1.jjtGetChild(3));
-
-            symtab.put(new String ("procedure " + child1_1.getValue().toLowerCase()),BLOCK,child1_1.getValue().toLowerCase());
-            symtab.put(child1_1.getValue().toLowerCase(),PROCEDURE,node);
-
-            child1_2.childrenAccept(this,data);
-            child1_3.jjtAccept(this,data);
-            child1_4.jjtAccept(this,data);
+            childProc_2.childrenAccept(this,data);
+            childProc_3.jjtAccept(this,data);
+            childProc_4.jjtAccept(this,data);
         }
         else {
             throw new WrongNumberOfChildrenException("CompilationUnit");
         }
+        node.jjtGetChild(numChildren-1).jjtAccept(this,data); // Semi()
+        
         return data;
     }
 
@@ -530,12 +519,12 @@ public class InterpreterVisitor implements LangVisitor {
      * "Dummy-node", everything should be done by
      * parent node ProcedureDeclaration
      */
-    public Object visit(ASTProcedureDeclarationParameters node, Object data) {
-        return data;
-    }
+//    public Object visit(ASTProcedureDeclarationParameters node, Object data) {
+//        return data;
+//    }
 
 
-    /**
+    /** TODO rewrite this description
      * In the Declaration a boolean/integer can de declare with or without
      * an assigment of BooleanExpression.
      * If there is no assigment directly, a random value is put
@@ -626,72 +615,72 @@ public class InterpreterVisitor implements LangVisitor {
     /**
      * Execute ForwardStatement from Turtle.
      */
-    public Object visit(ASTForwardStatement node, Object data) {
-        if (node.jjtGetNumChildren() == 1) {
-            SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
-
-            Integer data1 = (Integer)(child1.jjtAccept(this,INTEGER));
-
-            if (execute) {
-                turtle.forward(data1.doubleValue());
-            }
-        }
-        else {
-            throw new WrongNumberOfChildrenException("ForwardStatement");
-        }
-        return data;
-    }
+//    public Object visit(ASTForwardStatement node, Object data) {
+//        if (node.jjtGetNumChildren() == 1) {
+//            SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
+//
+//            Integer data1 = (Integer)(child1.jjtAccept(this,INTEGER));
+//
+//            if (execute) {
+//                turtle.forward(data1.doubleValue());
+//            }
+//        }
+//        else {
+//            throw new WrongNumberOfChildrenException("ForwardStatement");
+//        }
+//        return data;
+//    }
 
     /**
      * Let Turtle jump to point (x,y);
      */
-    public Object visit(ASTJumpToStatement node, Object data) {
-        if (node.jjtGetNumChildren() == 2) {
-            SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
-            SimpleNode child2 = (SimpleNode)(node.jjtGetChild(1));
-
-            Integer data1 = (Integer)(child1.jjtAccept(this,INTEGER));
-            Integer data2 = (Integer)(child2.jjtAccept(this,INTEGER));
-
-            if (execute) {
-                turtle.moveTo(data1.doubleValue(),data2.doubleValue());
-            }
-        }
-        else {
-            throw new WrongNumberOfChildrenException("JumpToStatement");
-        }
-        return data;
-    }
+//    public Object visit(ASTJumpToStatement node, Object data) {
+//        if (node.jjtGetNumChildren() == 2) {
+//            SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
+//            SimpleNode child2 = (SimpleNode)(node.jjtGetChild(1));
+//
+//            Integer data1 = (Integer)(child1.jjtAccept(this,INTEGER));
+//            Integer data2 = (Integer)(child2.jjtAccept(this,INTEGER));
+//
+//            if (execute) {
+//                turtle.moveTo(data1.doubleValue(),data2.doubleValue());
+//            }
+//        }
+//        else {
+//            throw new WrongNumberOfChildrenException("JumpToStatement");
+//        }
+//        return data;
+//    }
 
     /**
      * new_line; put a new line to the console.
      */
-    public Object visit(ASTNewLineStatement node, Object data) {
-        if (execute) {
-            console.append("");
-        }
-        return data;
-    }
+//    public Object visit(ASTNewLineStatement node, Object data) {
+//        if (execute) {
+//            console.append("");
+//        }
+//        return data;
+//    }
 
     /**
      * Turtle.penDown();
      */
-    public Object visit(ASTPenDownStatement node, Object data) {
-        if (execute) {
-            turtle.penDown();
-        }
-        return data;
-    }
+//    public Object visit(ASTPenDownStatement node, Object data) {
+//        if (execute) {
+//            turtle.penDown();
+//        }
+//        return data;
+//    }
 
     /**
      * Turtle.penUp();
      */
-    public Object visit(ASTPenUpStatement node, Object data) {
-        if (execute) {
-            turtle.penUp();
-        }
-        return data;
-    }
+//    public Object visit(ASTPenUpStatement node, Object data) {
+//        if (execute) {
+//            turtle.penUp();
+//        }
+//        return data;
+//    }
 
     /**
      * This procedure is used by Put- and PutLineStatement.
@@ -764,19 +753,19 @@ public class InterpreterVisitor implements LangVisitor {
      * This will put the result of BooleanExpression, IntegerExpression
      * or StringLiteral. Uses helpPutOrPutLineStatement
      */
-    public Object visit(ASTPutStatement node, Object data) {
-        helpPutOrPutLineStatement(node,data,"");
-        return data;
-    }
+//    public Object visit(ASTPutStatement node, Object data) {
+//        helpPutOrPutLineStatement(node,data,"");
+//        return data;
+//    }
 
     /**
      * This will put a line with result of BooleanExpression, IntegerExpression
      * or StringLiteral. Uses helpPutOrPutLineStatement
      */
-    public Object visit(ASTPutLineStatement node, Object data) {
-        helpPutOrPutLineStatement(node,data,"\n");
-        return data;
-    }
+//    public Object visit(ASTPutLineStatement node, Object data) {
+//        helpPutOrPutLineStatement(node,data,"\n");
+//        return data;
+//    }
 
     /**
      * return "String" (Object).
@@ -788,16 +777,17 @@ public class InterpreterVisitor implements LangVisitor {
     /**
      * Reset turtle to point(0,0); The direction of the turtle is -90
      */
-    public Object visit(ASTResetTurtleStatement node, Object data) {
-        if (execute) {
-            turtle.resetTurtle();
-        }
-        return data;
-    }
+//    public Object visit(ASTResetTurtleStatement node, Object data) {
+//        if (execute) {
+//            turtle.resetTurtle();
+//        }
+//        return data;
+//    }
 
     /**
      * Turtle.turn();
      */
+    /*
     public Object visit(ASTTurnStatement node, Object data) {
         if (node.jjtGetNumChildren() == 1) {
             SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
@@ -814,11 +804,13 @@ public class InterpreterVisitor implements LangVisitor {
         }
         return data;
     }
+    */
 
     /**
      * This procedure let the turtle turn to the degree you want.
      * It get an IntegerExpression as value
      */
+    /*
     public Object visit(ASTTurnToStatement node, Object data) {
         if (node.jjtGetNumChildren() == 1) {
             SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
@@ -833,6 +825,7 @@ public class InterpreterVisitor implements LangVisitor {
             throw new WrongNumberOfChildrenException("TurnToStatement");
         }
     }
+    */
 
     /**
      * Assignment of BooleanExpression or IntegerExpression to a
@@ -904,9 +897,9 @@ public class InterpreterVisitor implements LangVisitor {
     /**
      * everything will be done by parent AssignmentStatement
      */
-    public Object visit(ASTAssignmentIdentifier node, Object data) {
-        return data;
-    }
+//    public Object visit(ASTAssignmentIdentifier node, Object data) {
+//        return data;
+//    }
 
     /**
      * throws an ExitStatementException. This will be catched by
@@ -997,9 +990,9 @@ public class InterpreterVisitor implements LangVisitor {
     /**
      * Will be done in ForStatement
      */
-    public Object visit(ASTForIdentifier node, Object data) {
-        return data;
-    }
+//    public Object visit(ASTForIdentifier node, Object data) {
+//        return data;
+//    }
 
     /**
      * "Dummy"-Node
@@ -1034,24 +1027,8 @@ public class InterpreterVisitor implements LangVisitor {
                         " is not correct.");
             }
 
-            
-            boolean elsePartExists = false;
-            if (node.jjtGetNumChildren() > 2 &&
-                    ((SimpleNode)(node.jjtGetChild(numOfChildren-1))).toString() == "ElsePart")
-            {
-                elsePartExists = true;
-            }
-            
-            int tmpNumOfChildren;
-            if (elsePartExists) {
-                tmpNumOfChildren = numOfChildren;
-			}
-            else {
-            	tmpNumOfChildren = numOfChildren+1;
-            }
-            
             // one of elsifPart
-            for (int i = 3; i< tmpNumOfChildren; i++) {
+            for (int i = 3; i< numOfChildren; i++) {
                 SimpleNode childI = (SimpleNode)(node.jjtGetChild(i-1));
 
                 if (checkingBooleanExpression((SimpleNode)childI.jjtGetChild(0))) {
@@ -1071,6 +1048,12 @@ public class InterpreterVisitor implements LangVisitor {
             }
 
             // elsePart
+            boolean elsePartExists = false;
+            if (node.jjtGetNumChildren() > 2 &&
+                    ((SimpleNode)(node.jjtGetChild(numOfChildren-1))).toString() == "ElsePart")
+            {
+                elsePartExists = true;
+            }
             if (elsePartExists) {
                 handleBreakpoint((SimpleNode)node.jjtGetChild(numOfChildren-1)); //BREAKPOINT
                 return node.jjtGetChild(numOfChildren-1).jjtAccept(this,data);
@@ -1286,9 +1269,9 @@ public class InterpreterVisitor implements LangVisitor {
 
     }
 
-    public Object visit(ASTProcedureCallStatementParameters node, Object data) {
-        return data;
-    }
+//    public Object visit(ASTProcedureCallStatementParameters node, Object data) {
+//        return data;
+//    }
 
     /**
      * WhileStatement has 2 children. Check the 1st child, if true then execute
@@ -1702,82 +1685,83 @@ public class InterpreterVisitor implements LangVisitor {
     /**
      * "DummyNode" - the parent nodes do the work....
      */
-    public Object visit(ASTProcedureDeclarationIdentifier node, Object data) {
-        return data;
-    }
+//    public Object visit(ASTProcedureDeclarationIdentifier node, Object data) {
+//        return data;
+//    }
 
     /**
      * "DummyNode" - the parent nodes do the work....
      */
-    public Object visit(ASTVariableDeclarationIdentifier node, Object data) {
-        return data;
-    }
+//    public Object visit(ASTVariableDeclarationIdentifier node, Object data) {
+//        return data;
+//    }
 
     /**
      * "DummyNode" - the parent nodes do the work....
      */
-    public Object visit(ASTProcedureCallStatementIdentifier node, Object data) {
-        return data;
-    }
+//    public Object visit(ASTProcedureCallStatementIdentifier node, Object data) {
+//        return data;
+//    }
 
     /**
      * "DummyNode" - the parent nodes do the work....
      */
-    public Object visit(ASTBooleanDeclarationNode node, Object data) {
-        return data;
-    }
+//    public Object visit(ASTBooleanDeclarationNode node, Object data) {
+//        return data;
+//    }
 
     /**
      * "DummyNode" - the parent nodes do the work....
      */
-    public Object visit(ASTIntegerDeclarationNode node, Object data) {
-        return data;
-    }
+//    public Object visit(ASTIntegerDeclarationNode node, Object data) {
+//        return data;
+//    }
 
     /**
      * This function becomes 2 IntegerExpression and turn the smaller one
      * back
      */
-    public Object visit(ASTMinExpression node, Object data) {
-        if (node.jjtGetNumChildren() == 2) {
-            SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
-            SimpleNode child2= (SimpleNode)(node.jjtGetChild(1));
-            Integer data1 = (Integer)(child1.jjtAccept(this,data));
-            Integer data2 = (Integer)(child2.jjtAccept(this,data));
-            if (data1.intValue() < data2.intValue()) {
-                return data1;
-            }
-            else {
-                return data2;
-            }
-        }
-        else {
-            throw new WrongNumberOfChildrenException("MinExpression");
-        }
-    }
+//    public Object visit(ASTMinExpression node, Object data) {
+//        if (node.jjtGetNumChildren() == 2) {
+//            SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
+//            SimpleNode child2= (SimpleNode)(node.jjtGetChild(1));
+//            Integer data1 = (Integer)(child1.jjtAccept(this,data));
+//            Integer data2 = (Integer)(child2.jjtAccept(this,data));
+//            if (data1.intValue() < data2.intValue()) {
+//                return data1;
+//            }
+//            else {
+//                return data2;
+//            }
+//        }
+//        else {
+//            throw new WrongNumberOfChildrenException("MinExpression");
+//        }
+//    }
 
     /**
      * This function becomes 2 IntegerExpression and turn the bigger one
      * back
      */
-    public Object visit(ASTMaxExpression node, Object data) {
-        if (node.jjtGetNumChildren() == 2) {
-            SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
-            SimpleNode child2= (SimpleNode)(node.jjtGetChild(1));
-            Integer data1 = (Integer)(child1.jjtAccept(this,data));
-            Integer data2 = (Integer)(child2.jjtAccept(this,data));
-            if (data1.intValue() > data2.intValue()) {
-                return data1;
-            }
-            else {
-                return data2;
-            }
-        }
-        else {
-            throw new WrongNumberOfChildrenException("MaxExpression");
-        }
-    }
+//    public Object visit(ASTMaxExpression node, Object data) {
+//        if (node.jjtGetNumChildren() == 2) {
+//            SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
+//            SimpleNode child2= (SimpleNode)(node.jjtGetChild(1));
+//            Integer data1 = (Integer)(child1.jjtAccept(this,data));
+//            Integer data2 = (Integer)(child2.jjtAccept(this,data));
+//            if (data1.intValue() > data2.intValue()) {
+//                return data1;
+//            }
+//            else {
+//                return data2;
+//            }
+//        }
+//        else {
+//            throw new WrongNumberOfChildrenException("MaxExpression");
+//        }
+//    }
 
+    /*
     public Object visit(ASTGetDirExpression node, Object data) {
         if (node.jjtGetNumChildren() == 0) {
             return new Integer((int)(turtle.getDirection()));
@@ -1786,30 +1770,31 @@ public class InterpreterVisitor implements LangVisitor {
             throw new WrongNumberOfChildrenException("GetDirExpression");
         }
     }
+    */
 
     /**
      * Turn back the x-position of the turtle
      */
-    public Object visit(ASTGetXExpression node, Object data) {
-        if (node.jjtGetNumChildren() == 0) {
-            return new Integer((int)(turtle.getPosition().getX()));
-        }
-        else {
-            throw new WrongNumberOfChildrenException("GetXExpression");
-        }
-    }
+//    public Object visit(ASTGetXExpression node, Object data) {
+//        if (node.jjtGetNumChildren() == 0) {
+//            return new Integer((int)(turtle.getPosition().getX()));
+//        }
+//        else {
+//            throw new WrongNumberOfChildrenException("GetXExpression");
+//        }
+//    }
 
     /**
      * Turn back the y-position of the turtle
      */
-    public Object visit(ASTGetYExpression node, Object data) {
-        if (node.jjtGetNumChildren() == 0) {
-            return new Integer((int)(turtle.getPosition().getY()));
-        }
-        else {
-            throw new WrongNumberOfChildrenException("GetYExpression");
-        }
-    }
+//    public Object visit(ASTGetYExpression node, Object data) {
+//        if (node.jjtGetNumChildren() == 0) {
+//            return new Integer((int)(turtle.getPosition().getY()));
+//        }
+//        else {
+//            throw new WrongNumberOfChildrenException("GetYExpression");
+//        }
+//    }
 
     /**
      * RandomExpression get 2 IntegerExpression and return a
@@ -1817,31 +1802,31 @@ public class InterpreterVisitor implements LangVisitor {
      * exclusive the bigger range.
      * It does not matter which range is bigger.
      */
-    public Object visit(ASTRandomExpression node, Object data) {
-        if (node.jjtGetNumChildren() == 2) {
-            SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
-            SimpleNode child2= (SimpleNode)(node.jjtGetChild(1));
-            Integer data1 = (Integer)(child1.jjtAccept(this,data));
-            Integer data2 = (Integer)(child2.jjtAccept(this,data));
-
-            int diff = Math.abs(data1.intValue() - data2.intValue());
-
-            int result;
-            if (data1.intValue() < data2.intValue()) {
-                result = data1.intValue();
-            }
-            else {
-                result = data2.intValue();
-            }
-
-            result = result + random.nextInt(diff);
-
-            return new Integer(result);
-        }
-        else {
-            throw new WrongNumberOfChildrenException("RandomExpression");
-        }
-    }
+//    public Object visit(ASTRandomExpression node, Object data) {
+//        if (node.jjtGetNumChildren() == 2) {
+//            SimpleNode child1 = (SimpleNode)(node.jjtGetChild(0));
+//            SimpleNode child2= (SimpleNode)(node.jjtGetChild(1));
+//            Integer data1 = (Integer)(child1.jjtAccept(this,data));
+//            Integer data2 = (Integer)(child2.jjtAccept(this,data));
+//
+//            int diff = Math.abs(data1.intValue() - data2.intValue());
+//
+//            int result;
+//            if (data1.intValue() < data2.intValue()) {
+//                result = data1.intValue();
+//            }
+//            else {
+//                result = data2.intValue();
+//            }
+//
+//            result = result + random.nextInt(diff);
+//
+//            return new Integer(result);
+//        }
+//        else {
+//            throw new WrongNumberOfChildrenException("RandomExpression");
+//        }
+//    }
 
     /**
      * This should be ok. Do nothing.
@@ -1872,5 +1857,174 @@ public class InterpreterVisitor implements LangVisitor {
         }
 
     }
+
+    /**
+     * TODO
+     */
+    public Object visit(ASTFunctionCallExpression node, Object data) {
+    	console.appendDebug("Sorry, FunctionCallExpression is not supported yet!");
+        return null;
+    }
+
+    /**
+     * TODO
+     */
+    public Object visit(ASTFunctionDeclaration node, Object data) {
+    	console.appendDebug("Sorry, FunctionDeclaration is not supported yet!");
+        return null;
+    }
+
+    /**
+     * TODO
+     */
+    public Object visit(ASTReturnStatement node, Object data) {
+    	console.appendDebug("Sorry, ReturnStatement is not supported yet!");
+        return null;
+    }
+
+	public Object visit(ASTArrayDeclaration node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTArrayDeclarationOthers node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTDeclareBlock node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTFloatLiteral node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTParameter node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTDeclarationParameters node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTCallParameters node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTTypeDeclaration node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTXorNode node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTWithClause node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTUseClause node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTPointerDeclaration node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTDiscreteDeclaration node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTRecordDeclaration node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTCaseStatement node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTCaseValues node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTType node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTBoolean node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTFloat node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTInteger node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTCharacter node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTString node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTCharacterLiteral node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTTypeExpression node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTPackageDeclaration node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTBody node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTParameterMode node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTIn node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object visit(ASTOut node, Object data) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

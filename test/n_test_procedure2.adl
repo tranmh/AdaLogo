@@ -1,0 +1,53 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  -- Hier werden Variablen
+  -- oder Prozeduren deklariert.
+--  procedure new_line(a : integer);
+  procedure new_line(a : in out integer := bla);
+  procedure new_line(a : out integer := 20);
+--  procedure new_line(a : in integer)
+--  is begin null; end;
+--  procedure new_line(a : integer := bla);
+  
+--  procedure new_line;
+--  procedure pen_up;
+--  procedure pen_down;
+--  procedure turtle_reset;
+  
+--  procedure new_line(a : in integer);
+--  procedure forward(a : in integer);
+--  procedure forward(a : in float);
+--  procedure get(a : out integer);
+--  procedure get(a : out float);
+--  procedure get(a : out boolean);
+--  procedure turn(a : in integer);
+--  procedure turn(a : in float);
+--  procedure turn_to(a : in integer);
+--  procedure turn_to(a : in float);
+--  procedure put(a : in integer);
+--  procedure put(a : in float);
+--  procedure put(a : in boolean);
+--  procedure put(a : in string);
+--  procedure put(a : in character);
+--  procedure put_line(a : in integer);
+--  procedure put_line(a : in float);
+--  procedure put_line(a : in boolean);
+--  procedure put_line(a : in string);
+--  procedure put_line(a : in character);
+--  procedure move_to(a : in integer; b : in integer);
+--  procedure move_to(a : in float; b : in float);
+  
+  
+begin
+  -- Hier steht das Programm.
+
+  null;
+end;

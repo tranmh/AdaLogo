@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  -- Hier werden Variablen
+  -- oder Prozeduren deklariert.
+  procedure bla (a : integer; 
+    b : in boolean;
+    c : in out integer;
+    d : out boolean) is begin null; end;
+  procedure blubb is begin null; end;
+  
+  --procedure hihi is begin null; end;
+  procedure hihi;
+  --procedure blaa(k : integer);
+  
+  --procedure hihi(d : integer);
+  procedure hihi is begin null; end;
+  
+  --procedure aha(a : integer) is begin null; end;
+  
+  procedure aha(a : integer);
+  procedure aha(a : boolean);
+  procedure aha(a : float);
+  
+  procedure aha(a : integer) is begin null; end;
+  procedure aha(a : boolean) is begin null; end;
+  procedure aha(a : float) is begin null; end;
+
+begin
+  -- Hier steht das Programm.
+
+  null;
+end;

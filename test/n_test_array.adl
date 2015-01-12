@@ -10,6 +10,11 @@ use adalogo;
 procedure NONAME is
   -- Hier werden Variablen, Funktionen
   -- oder Prozeduren deklariert.
+  
+  a, b, c, d : array(1..10,2..23) of boolean;
+  a, b, c : integer := 10;
+  
+  a, b, c, d : array(1..2,3..4) of integer := (others => (others => 0));
 
 begin
   -- Hier steht das Programm.

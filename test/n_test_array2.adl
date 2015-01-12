@@ -1,0 +1,29 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  -- Hier werden Variablen, Funktionen
+  -- oder Prozeduren deklariert.
+  a, b, c : array(1..2,3..4,5..6) of boolean := (others => (others => (others => true)));
+--  c : array(1..10) of boolean;
+--  d : array(10..1) of float;
+--  e,e2,e3 : array(1..2) of integer;
+--  f : array(-2..7) of integer := (others => 10);
+--  g,g2 : array(-2..7) of float := (others => -20.0);
+--  h,h2,h3,h4 : array(-2..7) of boolean := (others => true);
+  
+  
+  
+  
+
+begin
+  -- Hier steht das Programm.
+
+  null;
+end;

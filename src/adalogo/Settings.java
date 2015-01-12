@@ -200,7 +200,8 @@ public class Settings {
     }
 
     //-------------------------------------------------------------------------
-    private static boolean printSyntaxTree = false;
+    // TODO turn it to false later.
+    private static boolean printSyntaxTree = true;
 
     public static boolean isPrintSyntaxTree() {
         return printSyntaxTree;

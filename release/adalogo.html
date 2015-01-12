@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>
+            AdaLogo
+        </title>
+        <style type="text/css" title="currentStyle" media="screen">
+            @import "style.css";
+        </style>
+    </head>
+    <body>
+        <h1>
+            AdaLogo
+        </h1>
+        <div id="version_notice">
+            latest build @BUILDTIME@
+        </div>
+        <div id="applet">
+            <!--[if !IE]>-->
+            <object id="object"
+                codetype="application/java"
+                classid="java:adalogo/AdaLogo"
+                archive="adalogo.jar">
+            <!--<![endif]-->
+                <object id="object"
+                    classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93">
+                    <param name="code" value="adalogo/AdaLogo"/>
+                    <param name="archive" value="adalogo.jar"/>
+                    you need java
+                </object>
+            <!--[if !IE]>-->
+            </object>
+            <!--<![endif]-->
+        </div>
+        <div id="webstart">
+            <a href="adalogo.jnlp">adalogo webstart</a>
+        </div>
+        <div id="source_link">
+            <a href="adalogosource.zip">adalogo source</a>
+        </div>
+        <div id="javadoc_link">
+            <a href="doc/index.html">adalogo source javadoc</a>
+        </div>
+        <div id="jjdoc_link">
+            <a href="doc/Lang.jj.html">adalogo javacc grammatik</a>
+        </div>
+    </body>
+</html>

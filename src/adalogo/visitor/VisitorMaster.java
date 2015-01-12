@@ -43,6 +43,7 @@ import adalogo.lang.Lang;
 import adalogo.lang.ParseException;
 import adalogo.lang.SimpleNode;
 import adalogo.lang.TokenMgrError;
+import adalogo.visitor.CheckVisitor.NotSupportYetException;
 import adalogo.visitor.InterpreterVisitor.AdaLogoSyntaxSemanticException;
 import adalogo.visitor.InterpreterVisitor.AssignmentStatementException;
 import adalogo.visitor.InterpreterVisitor.ExitStatementException;
@@ -224,14 +225,15 @@ public class VisitorMaster implements Runnable, FileHandlerListener {
                 new DumpVisitor(engine, this, node);
             }
 
-            //TODO redesign dirty execute hack
+            //TODOlater redesign dirty execute hack
             //with seperate visitor
 
+            // TODO
             //first "check" code for errors with pretend execute
-            //new InterpreterVisitor(engine, this, node, false);
+            new CheckVisitor(engine, this, node);
 
             //then execute code for real
-            new InterpreterVisitor(engine, this, node, true);
+            //new InterpreterVisitor(engine, this, node, true);
 
         } catch (AssignmentStatementException e) {
             console.appendError(e.getMessage());
@@ -273,8 +275,10 @@ public class VisitorMaster implements Runnable, FileHandlerListener {
             console.appendError("Exit is only allowed in loops.");
             //e.printStackTrace();
         } catch (AdaLogoSyntaxSemanticException e) {
-            console.appendError("Execution aborted.");
             console.appendError(e.getMessage());
+            //e.printStackTrace();
+        } catch (NotSupportYetException e) {
+            console.appendError("Sorry! The feature " + e.getMessage() + " is not supported yet by AdaLogo.");
             //e.printStackTrace();
         } catch (ParseException e) {
             console.appendError(e.toString());

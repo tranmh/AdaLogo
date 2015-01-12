@@ -36,6 +36,7 @@ import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
+import javax.swing.JOptionPane;
 
 import adalogo.Engine;
 import adalogo.Settings;
@@ -162,6 +163,16 @@ public class Console extends JPanel implements VisitorListener {
      */
     public synchronized void appendInternal(String message) {
         append(message + newline, internal);
+        // TODO remove this.
+        getVariable();
+    }
+    
+    /**
+     * TODO 
+     */
+    public String getVariable() {
+    	JOptionPane.showMessageDialog(null, "bla");
+    	return "";
     }
 
     //-------------------------------------------------------------------------

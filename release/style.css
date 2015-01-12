@@ -1,0 +1,39 @@
+/* http://www.validhtml.com/farbzusammenstellung/?color=95FF7F */
+
+body {
+color: #000000;
+}
+
+h1 {
+text-align: center;
+}
+
+#version_notice {
+text-align: center;
+}
+
+#applet {
+text-align: center;
+}
+
+#object {
+width: 300px;
+height: 100px;
+margin: 5px 5px 5px 5px;
+}
+
+#webstart {
+text-align: center;
+}
+
+#source_link {
+text-align: center;
+}
+
+#javadoc_link {
+text-align: center;
+}
+
+#jjdoc_link {
+text-align: center;
+}

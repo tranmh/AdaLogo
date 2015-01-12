@@ -95,6 +95,7 @@ public class SyntaxDocument extends DefaultStyledDocument {
         keywords.add("null");
 
         keywords.add("forward");
+        keywords.add("get");
         keywords.add("turn");
         keywords.add("turn_to");
         keywords.add("move_to");
@@ -104,16 +105,19 @@ public class SyntaxDocument extends DefaultStyledDocument {
         keywords.add("turtle_dir");
         keywords.add("turtle_x");
         keywords.add("turtle_y");
+        keywords.add("turtle_pen_down");
 
         keywords.add("new_line");
         keywords.add("put");
         keywords.add("put_line");
 
         keywords.add("random");
-        keywords.add("max");
-        keywords.add("min");
         keywords.add("mod");
         keywords.add("rem");
+        
+        keywords.add("cos");
+        keywords.add("sin");
+        keywords.add("tan");
 
         keywords.add("with");
         keywords.add("use");
@@ -122,12 +126,21 @@ public class SyntaxDocument extends DefaultStyledDocument {
         keywords.add("is");
         keywords.add("begin");
         keywords.add("end");
+        
+        keywords.add("package");
+        keywords.add("body");
 
-        //keywords.add("function");
-        //keywords.add("return");
+        keywords.add("function");
+        keywords.add("return");
 
         keywords.add("boolean");
         keywords.add("integer");
+        keywords.add("float");
+        keywords.add("string");
+        keywords.add("character");
+        keywords.add("array");
+        keywords.add("others");
+        keywords.add("type");
 
         keywords.add("true");
         keywords.add("false");
@@ -135,6 +148,7 @@ public class SyntaxDocument extends DefaultStyledDocument {
         keywords.add("and");
         keywords.add("or");
         keywords.add("not");
+        keywords.add("xor");
 
         keywords.add("if");
         keywords.add("then");
@@ -142,11 +156,18 @@ public class SyntaxDocument extends DefaultStyledDocument {
         keywords.add("elsif");
 
         keywords.add("for");
-        keywords.add("in");
         keywords.add("reverse");
         keywords.add("while");
         keywords.add("loop");
         keywords.add("exit");
+        
+        keywords.add("in");
+        keywords.add("out");
+        
+        keywords.add("declare");
+        
+        keywords.add("case");
+        keywords.add("when");
 
     }
 

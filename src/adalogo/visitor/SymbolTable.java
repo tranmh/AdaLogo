@@ -36,12 +36,19 @@ import java.util.Stack;
  */
 public class SymbolTable {
 
+    // TODO remove this later. we do not need this anymore.
+	//private static final String FUNCTION = "function";
+	//private static final String PROCEDURE = "procedure";
+	
     /**
      * symbol table exceptions.
      * nothing special here.
      */
     public class SymbolTableException extends RuntimeException {
-        //TODOlater convert RuntimeException to real Exception
+    	
+		private static final long serialVersionUID = 1L;
+
+		//TODOlater convert RuntimeException to real Exception
         //runtime exception was used to to avoid massive numbers
         //of try catch blocks in interpreter
         public SymbolTableException(String message) {
@@ -87,7 +94,8 @@ public class SymbolTable {
     public void put(Object name, Object type, Object value) throws SymbolTableException {
         Map symtab = (HashMap)stack.peek();
         if (symtab.containsKey(name)) {
-            throw new SymbolTableException("Variable or procedure "+name+" already exists");
+			// TODO write this exception with line and column
+            throw new SymbolTableException("Variable, function or procedure "+name+" already exists");
         }
         symtab.put(name, new Variable(type, value));
         fireNewVariable(name); //HLT
@@ -103,8 +111,9 @@ public class SymbolTable {
             if (symtab.containsKey(name)) {
                 return (Variable)symtab.get(name);
             }
-        }
-        throw new SymbolTableException("Variable or procedure "+name+" does not exist");
+        } 
+        // TODO write this exception with line and column
+        throw new SymbolTableException("Variable, function or procedure "+name+" does not exist");
     }
 
     /**
@@ -142,7 +151,7 @@ public class SymbolTable {
      * get the value of the variable name.
      * throws exception if variable not found.
      */
-    public Object getValue(Object name)  throws SymbolTableException {
+    public Object getValue(Object name) throws SymbolTableException {
         return getVariable(name).value;
     }
 
@@ -162,6 +171,12 @@ public class SymbolTable {
         //System.out.println("debug");
         getVariable(name).value = value;
         fireValueChanged(name); //HLT
+    }
+    
+    public void setType(Object name, Object type) throws SymbolTableException {
+    	getVariable(name).type = type;
+    	// TODO: something like fireTypeChanged(name)
+    	//fireValueChanged(name); // MCT
     }
 
     /**
@@ -184,6 +199,30 @@ public class SymbolTable {
             throw new SymbolTableException("level was downest");
         }
     }
+    
+
+    // TODO remove this later. we do not need this anymore.
+    /**
+     *  
+     * @return
+     */
+//    public boolean existsUnprotectedFunction() {
+//    	Variable variable;
+//    	variable = new Variable(FUNCTION,null);
+//        Map symtab = (HashMap)stack.peek();
+//        return symtab.containsValue(variable);
+//    }
+
+    /**
+     *  
+     * @return
+     */
+//    public boolean existsUnprotectedProcedure() {
+//    	Variable variable;
+//    	variable = new Variable(PROCEDURE,null);
+//        Map symtab = (HashMap)stack.peek();
+//        return symtab.containsValue(variable);
+//    }
 
 
     //-------------------------------------------------------------------------
@@ -399,5 +438,6 @@ public class SymbolTable {
         }
 
     }
+
 
 }
