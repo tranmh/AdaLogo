@@ -1,0 +1,60 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  -- Hier werden Variablen oder
+  -- oder Prozeduren definiert.
+
+  procedure bla is 
+    procedure blubb is
+    begin
+      forward(100);
+      turn(45);
+    end;
+
+    procedure foo is
+      procedure bla is 
+      begin
+        forward(500);
+        turn(45);
+      end;
+    begin
+      forward(200);
+      turn(45);
+      bla;
+    end;
+  begin
+    blubb;
+    foo;    
+  end;
+
+  procedure blubb is
+  begin
+    forward(300);
+    turn(45);
+
+    foo;
+  end;
+
+  procedure foo is 
+  begin
+    forward(400);
+    turn(45);
+
+    blubb;
+
+    bla;
+  end;
+
+
+begin
+  -- Hier steht das Programm:
+  resetturtle;
+  bla;
+end;

@@ -1,0 +1,93 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  -- Hier werden Variablen oder
+  -- oder Prozeduren definiert.
+  
+  procedure tue_nichts is 
+  begin
+    null;
+  end;
+  
+  procedure quadrat(laenge : integer) is
+  begin
+    for i in 1..4 loop
+      forward(laenge);
+      turn(90);
+    end loop;
+  end;
+  
+  procedure line(laenge : integer; do_it : boolean) is
+  begin 
+    if do_it then
+      forward(laenge);
+    end if;
+  end;
+  
+  procedure quader(do_it : boolean; laenge : integer; breite : integer ) is
+  begin
+    if do_it then
+      forward(laenge);
+      turn(90);
+      forward(breite);
+      turn(90);
+    end if;
+
+    forward(laenge);
+    turn(90);
+    forward(breite);
+    turn(90);
+
+  end;
+  
+  a : integer := 100;
+  b : boolean := true;
+  
+begin
+  turtle_reset;
+  
+  tue_nichts;
+  
+  line(10, b or true);
+  turn(90);
+  line(a, true);
+  turn(90);
+  line(a*2+10, false);
+  turn(90);
+  
+  quadrat(90);
+  turn(20);
+  quadrat(a);
+  turn(20);
+  quadrat(a-20);
+  turn(20);
+  
+  quader(true,a,40);
+  turn(45);
+  quader(true or b,20,a);
+  turn(45);
+  quader(true and false,20,a-20);
+  turn(45);
+  quader(true,a,a);
+  turn(45);
+  quader(false,a mod 70,a * 2);
+  turn(45);
+  
+  -- some impossible things:
+  --quader;
+  --quader(90);
+  --quader(false, true,10);
+  
+  --quadrat(true);  
+  --line(10 + true);
+  
+  --tue_nichts(bla);
+
+end;

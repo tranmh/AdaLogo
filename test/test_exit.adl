@@ -1,0 +1,50 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  -- Hier werden Variablen oder
+  -- oder Prozeduren definiert.
+
+  counter : integer := 0;
+  a : boolean := true;
+
+begin
+  -- Hier steht das Programm:
+  turtle_reset;
+
+  while a loop
+
+    loop
+      counter := counter + 1;
+
+      forward(100*counter);
+      turn(10*9);
+  
+  
+      if counter = 5 then
+        a := false;
+        exit;
+      end if;
+
+
+      for i in 1..4 loop
+        turn(random(45,90));
+        if i=2 then
+          exit;
+        end if;
+      end loop;
+  
+    end loop;
+  
+    if a then 
+      exit;
+    end if;
+
+  end loop;
+end;

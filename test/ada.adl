@@ -1,0 +1,53 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-16
+-- Idee:  Zeichnen von "ADA"
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure ada is
+
+  procedure a is 
+  begin
+    turn_to(60);
+    forward(130);
+    turn_to(-60);
+    forward(130);
+    turn_to(160);
+    pen_up;
+    forward(120);
+    pen_down;
+    turn_to(0);
+    forward(95);
+    put_line("A");
+  end;
+  
+  procedure d is 
+  begin
+    turn_to(90);
+    forward(115);
+    turn_to(0);
+    for i in 1..180 loop
+      forward(1);
+      turn(-1);
+    end loop;
+    put_line("D");
+  end;
+  
+  procedure jump_to(x : integer; y : integer) is
+  begin
+    pen_up;
+    move_to(x,y);
+    pen_down;
+  end;
+
+begin
+  turtle_reset;
+  a;
+  jump_to(133,0);
+  d;  
+  jump_to(175,0);
+  a;
+end;

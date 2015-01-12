@@ -1,0 +1,117 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-16
+-- Idee:  Zeichnen von Hilbert-Kurve
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure hilbert is
+  -- X -> -YF+XFX+FY- // X := 0
+  -- Y -> +XF-YFY-FX+ // Y := 1
+  -- // F := 2
+  -- + := 3
+  -- - := 4
+
+  a_x : integer := 0;
+  a_y : integer := 0;
+  
+  b_x : integer;
+  b_y : integer;
+  
+  axy : integer := 1;
+  
+  lengthf :integer := 8; -- schrittlaenge startwert
+  direction : integer := 90; -- richtung in grad
+  rotation : integer := 90; -- drehung in grad
+  
+  procedure _hilbert(instruction : integer; depth : integer) is 
+  
+    p : integer := 0;
+    q : integer := 0;
+  
+  begin 
+    if depth = 0 then
+      null;
+    else 
+      depth := depth - 1;
+    
+      -- X -> -YF+XFX+FY- // X := 0
+      -- Y -> +XF-YFY-FX+ // Y := 1
+      -- // F := 2
+      -- + := 3
+      -- - := 4
+      if instruction = 0 then
+        _hilbert(4,depth); -- -
+        _hilbert(1,depth); -- Y
+        _hilbert(2,depth); -- F
+        _hilbert(3,depth); -- +
+        _hilbert(0,depth); -- X
+        _hilbert(2,depth); -- F
+        _hilbert(0,depth); -- X
+        _hilbert(3,depth); -- +
+        _hilbert(2,depth); -- F
+        _hilbert(1,depth); -- Y
+        _hilbert(4,depth); -- -
+      
+      -- X -> -YF+XFX+FY- // X := 0
+      -- Y -> +XF-YFY-FX+ // Y := 1
+      -- // F := 2
+      -- + := 3
+      -- - := 4
+      elsif instruction = 1 then
+        _hilbert(3,depth); -- +
+        _hilbert(0,depth); -- X
+        _hilbert(2,depth); -- F
+        _hilbert(4,depth); -- -
+        _hilbert(1,depth); -- Y
+        _hilbert(2,depth); -- F
+        _hilbert(1,depth); -- Y
+        _hilbert(4,depth); -- -
+        _hilbert(2,depth); -- F
+        _hilbert(0,depth); -- X
+        _hilbert(3,depth); -- +
+      
+      elsif instruction = 2 then
+        if direction = 0 then
+          p := lengthf;
+          q := 0;
+        elsif direction = 90 then
+          p := 0;
+          q := lengthf;
+        elsif direction = 180 then
+          p := -lengthf;
+          q := 0;
+        elsif direction = 270 then
+          p := 0;
+          q := -lengthf;
+        else
+          put_line("This should never happen!");
+        end if;
+        
+        b_x := a_x + p;
+        b_y := a_y + q;
+        
+        move_to(b_x,b_y);
+        
+        a_x := b_x;
+        a_y := b_y;
+        
+      elsif instruction = 3 then
+        direction := (direction + rotation) mod 360;
+        
+      elsif instruction = 4 then
+        direction := (direction - rotation) mod 360;
+        
+      else
+        put_line("This should never happen!");
+      end if;
+    end if;
+  end;
+
+begin
+  turtle_reset;
+  _hilbert(0,6);
+  
+end;

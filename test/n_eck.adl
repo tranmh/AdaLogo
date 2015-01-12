@@ -1,0 +1,30 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-13
+-- Idee: Wir zeichnen einpaar gleichmaessige n-Ecken.
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure n_eck_ is
+
+  procedure n_eck(n : integer; kante : integer) is
+  begin
+    for i in 1..n loop
+      forward(kante);
+      turn(180 - (180*(n-2) / n));
+    end loop;
+  end;
+
+begin
+  turtle_reset;
+  for i in 3..6 loop
+    n_eck(i,100);
+    put("Das ist ein gleichmaessiges ");
+    put(i);
+    put_line("-Eck.");
+  end loop;
+  n_eck(15,100);
+
+end;

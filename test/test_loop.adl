@@ -1,0 +1,39 @@
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+
+  a:integer:=0;
+  b:integer:=0;
+
+begin
+  
+  --infinite loop erkannt aber nicht gestoppt
+--  loop
+--    null;
+--  end loop;
+
+  a:=0;
+  loop
+    put(".");
+    a:=a+1;
+    --exit when i>10; --geht nicht :(
+    if a>10 then exit; end if;
+  end loop;
+  new_line;
+  
+  a:=0;
+  loop
+    b:=0;
+    loop
+      put("b");
+      b:=b+1;
+      if b>2 then exit; end if;
+    end loop;
+    put("a");
+    a:=a+1;
+    if a>2 then exit; end if;
+  end loop;
+  new_line;
+  
+end;

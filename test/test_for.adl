@@ -1,0 +1,35 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  -- Hier werden Variablen oder
+  -- oder Prozeduren definiert.
+
+begin
+  -- Hier steht das Programm:
+  
+--  for i in 1..4 loop
+--    forward(100*i);
+--    turn(90);
+-- end loop;
+--
+--  for i in reverse 1..4 loop
+--    forward(100*i);
+--    turn(90);
+-- end loop;
+ 
+ for i in 1..3 loop
+  for j in 1..4 loop
+    for k in reverse -3..2 loop
+      turn(i*j*k);
+      forward(i*j*k);
+    end loop;
+  end loop;
+ end loop;
+end;

@@ -1,0 +1,46 @@
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+
+  a:boolean:=false;
+  b:boolean:=true;
+  c:boolean:=false;
+  d:boolean:=true;
+
+begin
+  
+  if false then
+    put("if");
+  elsif false then
+    put("elsif1");
+  elsif false then
+    put("elsif2");
+  else
+    put("else");
+  end if;
+  put_line(".");
+    
+  if a then
+    put("if"); --b:=true;
+  elsif b then
+    put("elsif1"); c:=true;
+  elsif c then
+    put("elsif2");
+  else
+    put("else");
+  end if;
+  put_line(".");
+  
+  if not a then
+    put("if");
+  elsif not b then
+    put("elsif1");
+  elsif not c then
+    put("elsif2");
+  else
+    put("else");
+  end if;
+  put_line(".");
+  
+end;

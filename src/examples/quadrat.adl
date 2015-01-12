@@ -1,0 +1,26 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-13
+-- Idee: Ein Quadrat wird gezeichnet. Dazu wird eine Hilfsprozedure geschrieben
+--       Die Prozedure quadrat hat einen Eingabeparameter kante. Somit kann man
+--       die Prozedure mehrfach wiederverwenden.
+-------------------------------------------------------------------------------
+
+
+with adalogo;
+use adalogo;
+
+procedure quadrat_ is
+  procedure quadrat(kante : integer) is
+  begin
+    for i in 1..4 loop
+      forward(kante);
+      turn(90);
+    end loop;
+  end;
+begin
+  turtle_reset;
+  quadrat(100);
+  turn(45);
+  quadrat(200);
+end;

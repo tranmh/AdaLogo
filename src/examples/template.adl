@@ -1,0 +1,18 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  -- Hier werden Variablen
+  -- oder Prozeduren deklariert.
+
+begin
+  -- Hier steht das Programm.
+
+  null;
+end;

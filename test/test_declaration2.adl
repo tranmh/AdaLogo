@@ -1,0 +1,30 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  -- Hier werden Variablen oder
+  -- oder Prozeduren definiert.
+  
+  a1 : integer;
+  a2 : integer := 10 + a1;
+  --a3 : integer := true;
+  --a4 : integer := 10 + a1 or c;
+  --a5 : integer := 1 + 2 * 3 / 4;
+  a6 : integer := -1 + 2 * 3 / 4 mod 10;
+  
+  b1 : boolean;
+  b2 : boolean := false;
+  --b3 : boolean := false + 10;
+  --b4 : boolean := 10;
+
+begin
+  -- Hier steht das Programm:
+  put_line(a6);
+
+end;

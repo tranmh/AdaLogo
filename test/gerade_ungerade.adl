@@ -1,0 +1,52 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-16
+-- Idee:  Die Prozedur gerade_ungerade bekommt _rekursiv_
+--        heraus, ob die Eingabe gerade oder ungerade war.
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure gerade_ungerade is
+
+  procedure even(zahl : integer) is
+  begin
+    if zahl < 0 then
+      even(-zahl);
+    elsif zahl = 0 then
+      put_line("Die Zahl war gerade");
+    else
+      turn(20);
+      forward(zahl);
+      odd(zahl-1);
+    end if;
+  end;
+
+  procedure odd(zahl : integer) is
+  begin
+    if zahl < 0 then
+      odd(-zahl);
+    elsif zahl = 0 then
+      put_line("Die Zahl war ungerade");
+    else
+      turn(-40);
+      forward(zahl);
+      even(zahl-1);
+    end if;
+  end;
+
+begin
+
+  turtle_reset;
+  for i in 1..18 loop
+    even(50);
+    --null;
+  end loop;
+  
+  for i in 1..18 loop
+    --even(51);
+    null;
+  end loop;
+
+end;

@@ -1,0 +1,59 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-09-15
+-- Idee: 
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure baum_ is
+  
+  --baum zeichnet ein baum mit der tiefe tiefe
+  --mit einer stammlaenge von laenge
+  --und zweig anzahl von zweige
+  procedure baum(
+      tiefe:integer;
+      laenge:integer;
+      zweige:integer) is
+
+    t:integer;
+    l:integer;
+    z:integer;
+
+    dir:integer:=turtle_dir;
+    tx:integer;
+    ty:integer;
+
+  begin
+    
+    forward(laenge);
+
+    tx:=turtle_x;
+    ty:=turtle_y;
+
+    for i in 0..zweige loop
+
+      t:=tiefe-1;
+      l:=laenge-30;
+      z:=zweige-1;
+      
+      if t>0 and l>10 and z>1 then
+        baum(t,l,z);
+      end if;
+
+      move_to(tx, ty);
+      turn_to(dir-45);
+      turn((90/(zweige-1))*i);
+
+    end loop;
+    
+  end;
+  
+begin
+
+  turtle_reset;
+  turn(90);
+  baum(3, 100, 4);
+  
+end;

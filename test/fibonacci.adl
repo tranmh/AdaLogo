@@ -1,0 +1,32 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-13
+-- Idee: Berechnung der Fibonacci-Zahlen
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure fibonacci is
+  i : integer := random(1,40);
+
+  procedure fib (n : integer) is
+    tmp0 : integer := 0;
+    tmp1 : integer := 1;
+    result : integer;
+  begin
+    for i in 1..n loop
+      result := tmp0 + tmp1;
+      tmp0 := tmp1;
+      tmp1 := result;
+    end loop;
+    put_line(result);
+  end;
+
+begin
+    put("Die ");
+    put(i);
+    put(". Fibonacci-Zahl ");
+    put(" lautet: ");
+    fib(i);
+end;

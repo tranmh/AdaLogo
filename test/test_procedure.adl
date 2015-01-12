@@ -1,0 +1,43 @@
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  
+  procedure foo(i:integer; b:boolean) is
+  begin
+    put("foo");
+    put(" i:"); put(i);
+    put(" b:"); put(b);
+    new_line;
+  end;
+
+  --in ada ist richtig, wird aber fehler gemeldet
+--  procedure foo is
+--  begin
+--    null;
+--  end;
+
+  --ist fehler, aber fehler erst bei aufruf
+  procedure bar(i:integer; i:integer) is
+  begin
+    put("bar");
+    put(" i:"); put(i);
+    put(" i:"); put(i);
+    new_line;
+  end;
+  
+  i:integer:=1;
+  b:boolean:=false;
+  
+begin
+  
+  foo(1,true);
+  foo(i,b);
+  foo(i+1, true or false);
+  
+  --foo(true,true); --fehlermeldung
+  --foo(1,1); --fehlermeldung
+  
+  --bar(1,2); --aufruf von fehlerhafte procedure
+  
+end;

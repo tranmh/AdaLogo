@@ -1,0 +1,23 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-13
+-- Idee: Parabel f(i)= 1/30*i^2
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure Parabel is
+begin
+  for i in reverse -100..0 loop
+    move_to(i,i*i/30);
+  end loop;
+
+  pen_up;
+  move_to(0,0);
+  pen_down;
+
+  for i in 0..100 loop
+    move_to(i,i*i/30);
+  end loop;
+end;

@@ -1,0 +1,32 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure foobar is
+  procedure viele_quadrate(kante : integer) is
+  begin
+    for i in 1..4 loop
+      forward(kante);
+      turn(90);
+    end loop;
+
+    if kante > 42 then
+      viele_quadrate(kante-5);      
+    elsif kante < -84 then
+      null;
+    else 
+      viele_quadrate(kante-5);      
+    end if; 
+  end;
+begin
+  viele_quadrate(84);
+  viele_quadrate(42);
+  turn(90);
+  viele_quadrate(84);
+  viele_quadrate(42);
+end;

@@ -1,0 +1,32 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-13
+-- Idee:  :-}
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure schnauzbart is
+
+  procedure bart(laenge : integer) is
+  begin
+    for i in 1..180 loop
+      forward(laenge*2);
+      turn(i*2);
+    end loop;
+
+    for i in 1..180 loop
+      forward(laenge*2);
+      turn(-i*2);
+    end loop;
+  end;
+
+begin
+
+  turtle_reset;
+  for k in 1..2 loop
+    bart(random(5,10));
+  end loop;
+
+end;

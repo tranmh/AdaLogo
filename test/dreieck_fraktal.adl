@@ -1,0 +1,27 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-16
+-- Idee:  Zeichnen vom dreieck_fraktal
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure dreieck_fraktal is
+
+  procedure _dreieck_fraktal(tiefe : integer; laenge : integer) is
+  begin
+    if tiefe > 0 then
+      for i in 0 .. 2 loop
+        forward(laenge);	
+        turn(-120);
+        _dreieck_fraktal(tiefe-1, laenge/2);
+      end loop;
+    end if;
+  end;
+
+begin
+  turtle_reset;
+  turn_to(180);
+  _dreieck_fraktal(6, 2*2*2*2*2*2*2*2*2);
+end;

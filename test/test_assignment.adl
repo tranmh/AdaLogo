@@ -1,0 +1,53 @@
+-------------------------------------------------------------------------------
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  -- Hier werden Variablen oder
+  -- oder Prozeduren definiert.
+  
+  a1 : integer := 10;
+  a2 : integer := 20;
+  
+  b1 : boolean := true;
+  b2 : boolean := false;
+  
+  
+begin
+  -- Hier steht das Programm:
+  a2 := a1;
+  a1 := a2;
+  a1 := a1 * a1;
+  a2 := a1 /  a1;
+  a2 := a1 +  a1;
+  a2 := a1 -  a1;
+  a2 := a1 mod  a1;
+  a2 := a1 rem  a1;
+  a2 := -a1;
+  a2 := a1 + a1 * a1 / a1 + 200 * - (a1 mod a1);
+  
+  b2 := b1;
+  b1 := b2;
+  b2 := b1 or b2;
+  b2 := b1 and b1;
+  b2 := b1 and not b1;
+  b2 := not (b1 and b1);
+  b2 := 100 <= 200;
+  b2 := a1 = a2;
+  b2 := a2 >= a1;
+  b2 := a1 < 10;
+  b2 := 100 > a1;
+  b2 := a1 /= a1;
+  
+  -- unavailable things:
+  --a1 := not a1;
+  --a2 := true < false;
+  --b1 := false or not a1;
+  -- ... to be continued.
+  
+end;

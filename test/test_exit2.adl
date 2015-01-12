@@ -1,0 +1,48 @@
+-- Autor:
+-- Datum:
+-- Idee:
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+
+  procedure bla is begin
+    --exit; --fehlermeldung
+    null;
+  end;
+
+  procedure blaa is begin 
+    for i in 1..10 loop
+      exit;
+    end loop;
+  end;
+
+  procedure blubb is 
+    procedure blubb is 
+    begin
+      exit; --fehlermeldung
+      null;
+    end;
+
+    procedure zui is
+    begin
+      for i in 1..10 loop
+        exit;
+      end loop;
+    end;
+  begin
+    zui;
+    blubb;
+  end;
+begin
+
+  --exit; --fehlermeldung
+
+  bla;
+  blaa;
+  blubb;
+  --zui; --aufruf von nicht sichtbare innere procedure
+  
+end;

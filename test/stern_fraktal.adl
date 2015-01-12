@@ -1,0 +1,131 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-16
+-- Idee:  Zeichnen vom stern_fraktal
+-------------------------------------------------------------------------------
+
+-- DEBUG
+-- look at: http://www.edu-actief.nl/javalogo/applet16.htm
+
+with adalogo;
+use adalogo;
+
+procedure stern_fraktal is
+
+  -- einstellungen:
+  maxniv : integer := 2;
+  factor : integer := 1; -- 
+  -- 1/(Math.sqrt(2+Math.sqrt(2))); ca. 0.5411961
+  z : integer := 50;
+
+  procedure stern(z : integer) is 
+  begin
+    for i in 0..8 loop
+  	stern_schritt(z);
+    end loop;
+  end;
+
+  procedure _stern_fraktal(niv : integer; z : integer; vol : boolean) is
+  begin 
+    if niv = 0 then
+      null;
+    else 
+      stern(z);
+      if niv-1 > 0 then
+        pen_up;
+        --pen_down;
+        stern_schritt(z);
+        stern_schritt(z);
+        pen_down;
+        --pen_up;
+        
+        turn(-112);
+        
+        if vol then 
+          _stern_fraktal(niv-1,z*54/100,true);
+        else 
+          _stern_fraktal(niv-1,z*54/100,false);
+        end if;
+        
+        turn(112);
+        
+        --pen_up;
+        pen_down;
+        stern_schritt(z);
+        --pen_down;
+        pen_up;
+        
+        turn(-112);
+  
+        if vol then 
+          _stern_fraktal(niv-1,z*54/100,true);
+        end if;
+
+        turn(112);
+
+        --pen_up;
+        pen_down;
+        stern_schritt(z);
+        --pen_down;
+        pen_up;
+
+        turn(-112);
+
+        if vol then 
+          _stern_fraktal(niv-1,z*54/100,false);
+        end if;
+
+        turn(112);
+
+        for i in 0..3 loop
+          --pen_up;
+          pen_down;
+          stern_schritt(z);
+          --pen_down;
+          pen_up;
+        end loop;
+      end if;
+    end if;
+  end;
+  
+  procedure stern_schritt(z : integer) is
+  begin 
+    forward(z);
+    turn(-110);
+    forward(z);
+    turn(155);
+  end;
+
+begin
+  turtle_reset;
+  
+  pen_down;
+
+  for i in 0..7 loop
+    turn(-112);
+    _stern_fraktal(maxNiv,z*54/100,true);
+    turn(112);
+    --pen_up;
+    pen_down;
+    stern_schritt(z);
+    --pen_down;
+    pen_up;
+  end loop;
+
+end;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

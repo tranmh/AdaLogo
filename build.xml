@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="AdaLogo" default="build" basedir=".">
+
+    <!-- basic path properties -->
+    <property name="src.dir" value="src"/>
+    <property name="bin.dir" value="bin"/>
+
+    <!-- path to packages -->
+    <property name="adalogo.dir" value="adalogo"/>
+    <property name="gui.dir" value="adalogo/gui"/>
+    <property name="lang.dir" value="adalogo/lang"/>
+    <property name="examples.dir" value="examples"/>
+    <property name="images.dir" value="images"/>
+
+    <property name="jjt.file" value="Lang.jjt"/>
+    <property name="jj.file" value="Lang.jj"/>
+
+    <property name="main.class" value="adalogo.AdaLogo"/>
+
+    <!-- release properties -->
+    <property name="release.dir" value="release"/>
+    <property name="html.file" value="adalogo.html"/>
+    <property name="stylesheet.file" value="style.css"/>
+    <property name="jar.file" value="adalogo.jar"/>
+    <property name="jar.sign.alias" value="sopra2005"/>
+    <property name="jar.sign.storepass" value="sopra2005"/>
+    <property name="jar.sign.file" value="adalogo.key"/>
+    <property name="webstart.file" value="adalogo.jnlp"/>
+    <property name="source.file" value="adalogosource.zip"/>
+    <property name="web.dir" value="${user.home}/WWW/adalogo_dev"/>
+
+    <!-- path to doc -->
+    <property name="doc.dir" value="doc"/>
+
+    <!-- build jjtree, javacc and javac -->
+    <target name="build" depends="init">
+        <antcall target="call-jjtree"/>
+        <antcall target="call-javacc"/>
+        <antcall target="call-javac"/>
+    </target>
+
+    <!-- jjtree, needs jjt file argument -->
+    <target name="call-jjtree" if="jjt.file" depends="init">
+        <jjtree
+            target="${src.dir}/${lang.dir}/${jjt.file}"
+            outputdirectory="${src.dir}/${lang.dir}"
+            javacchome="${javacchome}"
+        />
+    </target>
+
+    <!-- javacc, needs jj file argument -->
+    <target name="call-javacc" if="jj.file" depends="init">
+        <javacc
+            target="${src.dir}/${lang.dir}/${jj.file}"
+            outputdirectory="${src.dir}/${lang.dir}"
+            javacchome="${javacchome}"
+        />
+    </target>
+
+    <!-- javac, needs srcdir and destdir, otherwise uses default -->
+    <target name="call-javac" depends="init">
+        <condition property="javac.srcdir" value="${src.dir}">
+            <not>
+                <isset property="javac.srcdir"/>
+            </not>
+        </condition>
+        <condition property="javac.destdir" value="${bin.dir}">
+            <not>
+                <isset property="javac.destdir"/>
+            </not>
+        </condition>
+        <javac
+            srcdir="${javac.srcdir}"
+            destdir="${javac.destdir}"
+            debug="false"
+            debuglevel="lines,vars,source"
+        />
+        <!-- copy extra "packages" -->
+        <copy todir="${javac.destdir}/${examples.dir}">
+            <fileset dir="${javac.srcdir}/${examples.dir}"/>
+        </copy>
+        <copy todir="${javac.destdir}/${images.dir}">
+            <fileset dir="${javac.srcdir}/${images.dir}"/>
+        </copy>
+    </target>
+
+    <!-- build, then run as applet via html file -->
+    <target name="run-applet" depends="init,build">
+        <copy file="${src.dir}/testapplet.html" todir="${bin.dir}"/>
+        <exec executable="appletviewer">
+            <arg value="${bin.dir}/testapplet.html"/>
+        </exec>
+    </target>
+
+    <!-- build, then run as application -->
+    <target name="run-application" depends="init,build">
+        <java
+            classname="${main.class}"
+            classpath="${bin.dir}"
+            fork="true"
+            dir="${bin.dir}"
+        />
+        <!--
+        <java
+            classname="${main.class}"
+            fork="true"
+            dir="${bin.dir}"
+        />
+        -->
+    </target>
+
+    <!-- release all this stuff as jar with html file -->
+    <target name="release" depends="init,clean-release,call-jjtree,call-javacc">
+
+        <mkdir dir="${release.dir}"/>
+
+        <!-- prepare timestamp properties -->
+        <tstamp>
+            <format
+                property="BUILDTIME"
+                pattern="yyyy-MM-dd HH:mm"
+                locale="de"
+            />
+        </tstamp>
+
+        <!-- copy source to release dir -->
+        <copy todir="${release.dir}/${src.dir}">
+            <fileset dir="${src.dir}"/>
+            <!-- insert build time while copying -->
+            <filterset>
+                <filter token="BUILDTIME" value="${BUILDTIME}"/>
+            </filterset>
+        </copy>
+
+        <!-- compile stuff in release dir -->
+        <antcall target="call-javac">
+            <param name="javac.srcdir" value="${release.dir}/${src.dir}"/>
+            <param name="javac.destdir" value="${release.dir}"/>
+        </antcall>
+
+        <!-- create jar (including source files) -->
+        <jar destfile="${release.dir}/${jar.file}">
+            <fileset dir="${release.dir}">
+                <include name="${adalogo.dir}/**"/>
+                <include name="${examples.dir}/**"/>
+                <include name="${images.dir}/**"/>
+            </fileset>
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+            </manifest>
+        </jar>
+        <signjar
+            jar="${release.dir}/${jar.file}"
+            alias="${jar.sign.alias}"
+            storepass="${jar.sign.storepass}"
+            keystore="${release.dir}/${jar.sign.file}"
+        />
+
+        <!-- create source zip -->
+        <zip
+            destfile="${release.dir}/${source.file}"
+            basedir="${release.dir}/${src.dir}"
+        />
+
+        <!-- copy jar and html file to ~/WWW/adalogo -->
+        <copy todir="${web.dir}" overwrite="true">
+            <fileset file="${release.dir}/${html.file}"/>
+            <fileset file="${release.dir}/${stylesheet.file}"/>
+            <!-- insert build time while copying -->
+            <filterset>
+                <filter token="BUILDTIME" value="${BUILDTIME}"/>
+            </filterset>
+        </copy>
+        <copy todir="${web.dir}" overwrite="true">
+            <fileset file="${release.dir}/${webstart.file}"/>
+            <fileset file="${release.dir}/${jar.file}"/>
+            <fileset file="${release.dir}/${source.file}"/>
+        </copy>
+        <copy todir="${web.dir}" overwrite="true">
+            <fileset dir=".">
+                <include name="**/${doc.dir}/**"/>
+            </fileset>
+        </copy>
+
+        <!-- chmod so world can view -->
+        <chmod perm="755">
+            <dirset dir="${web.dir}"/>
+        </chmod>
+        <chmod perm="644">
+            <fileset dir="${web.dir}"/>
+        </chmod>
+
+        <echo message="files copied to ${web.dir}"/>
+    </target>
+
+    <!-- create documentation using javadoc and jjdoc -->
+    <target name="doc" depends="init,clean-doc,call-jjtree,call-javacc">
+        <antcall target="doc-javadoc"/>
+        <antcall target="doc-jjdoc"/>
+    </target>
+
+    <!-- create javadoc -->
+    <target name="doc-javadoc" depends="init,call-jjtree,call-javacc">
+        <mkdir dir="${doc.dir}"/>
+        <javadoc
+            sourcepath="${src.dir}"
+            destdir="${doc.dir}"
+            packagenames="${adalogo.dir}.*"
+            use="true"
+        />
+        <echo message="javadoc created in ${doc.dir}"/>
+    </target>
+
+    <!-- create jjdoc -->
+    <target name="doc-jjdoc" depends="init,call-jjtree,call-javacc">
+        <mkdir dir="${doc.dir}"/>
+        <jjdoc
+            target="${src.dir}/${lang.dir}/${jj.file}"
+            outputfile="${doc.dir}/${jj.file}.html"
+            javacchome="${javacchome}"
+        />
+        <echo message="jjdoc created in ${doc.dir}"/>
+    </target>
+
+    <!-- clean all -->
+    <target name="clean">
+        <antcall target="clean-build"/>
+        <antcall target="clean-javacc"/>
+        <antcall target="clean-release"/>
+        <antcall target="clean-doc"/>
+    </target>
+
+    <!-- delete bin dir -->
+    <target name="clean-build">
+        <delete includeemptydirs="true">
+            <fileset dir="${bin.dir}" includes="**/*"/>
+        </delete>
+    </target>
+
+    <!-- delete jjtree/javacc stuff -->
+    <target name="clean-javacc">
+        <!-- only listed files will be deleted -->
+        <delete includeemptydirs="true">
+            <fileset dir="${src.dir}/${lang.dir}">
+                <!-- delete all AST*.java files -->
+                <include name="AST*.java"/>
+                <!-- delete other default jjtree/javacc files -->
+                <include name="JJTLangState.java"/>
+                <include name="Lang.java"/>
+                <include name="LangConstants.java"/>
+                <include name="LangTokenManager.java"/>
+                <include name="LangTreeConstants.java"/>
+                <include name="LangVisitor.java"/>
+                <include name="Node.java"/>
+                <include name="ParseException.java"/>
+                <include name="SimpleCharStream.java"/>
+                <include name="Token.java"/>
+                <include name="TokenMgrError.java"/>
+                <include name="Lang.jj"/>
+                <!-- comment out files which should not be deleted
+                <include name="SimpleNode.java"/>
+                -->
+            </fileset>
+        </delete>
+    </target>
+
+    <!-- delete release stuff -->
+    <target name="clean-release">
+        <delete file="${release.dir}/${jar.file}"/>
+        <delete file="${release.dir}/${source.file}"/>
+        <delete dir="${release.dir}/${src.dir}"/>
+        <delete dir="${release.dir}/${adalogo.dir}"/>
+        <delete dir="${release.dir}/${examples.dir}"/>
+        <delete dir="${release.dir}/${images.dir}"/>
+    </target>
+
+    <!-- delete doc -->
+    <target name="clean-doc">
+        <delete dir="${doc.dir}"/>
+    </target>
+
+    <target name="init" unless="javacchome">
+        <!-- check for javacc in base dir -->
+        <condition property="javacchome" value="javacc-3.2">
+            <available file="javacc-3.2/bin/lib/javacc.jar"/>
+        </condition>
+        <!-- check for javacc in /temp -->
+        <condition property="javacchome" value="/temp/javacc-3.2">
+            <available file="/temp/javacc-3.2/bin/lib/javacc.jar"/>
+        </condition>
+        <condition property="javacchome" value="/temp/${user.name}/javacc-3.2">
+            <available file="/temp/${user.name}/javacc-3.2/bin/lib/javacc.jar"/>
+        </condition>
+        <!-- check for javacc in /tmp -->
+        <condition property="javacchome" value="/tmp/javacc-3.2">
+            <available file="/tmp/javacc-3.2/bin/lib/javacc.jar"/>
+        </condition>
+        <condition property="javacchome" value="/tmp/${user.name}/javacc-3.2">
+            <available file="/tmp/${user.name}/javacc-3.2/bin/lib/javacc.jar"/>
+        </condition>
+        <!-- check for javacc in /tmptmp -->
+        <condition property="javacchome" value="/tmptmp/javacc-3.2">
+            <available file="/tmptmp/javacc-3.2/bin/lib/javacc.jar"/>
+        </condition>
+        <condition property="javacchome" value="/tmptmp/${user.name}/javacc-3.2">
+            <available file="/tmptmp/${user.name}/javacc-3.2/bin/lib/javacc.jar"/>
+        </condition>
+        <!-- check for javacc in user home -->
+        <condition property="javacchome" value="${user.home}/javacc-3.2">
+            <available file="${user.home}/javacc-3.2/bin/lib/javacc.jar"/>
+        </condition>
+        <condition property="javacchome" value="${user.home}/tmp/javacc-3.2">
+            <available file="${user.home}/tmp/javacc-3.2/bin/lib/javacc.jar"/>
+        </condition>
+        <condition property="javacchome" value="${user.home}/temp/javacc-3.2">
+            <available file="${user.home}/temp/javacc-3.2/bin/lib/javacc.jar"/>
+        </condition>
+        <!-- default in ubuntu -->
+        <condition property="javacchome" value="/usr/share/java">
+            <available file="/usr/share/java/javacc.jar"/>
+        </condition>
+        <!-- fail if not found -->
+        <fail message="javacc not found" unless="javacchome"/>
+    </target>
+
+</project>

@@ -1,0 +1,35 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-16
+-- Idee:  kreise-mandala
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure tunnel is
+
+procedure kreis(groesse:integer) is
+begin
+  for i in 1..360/9 loop
+    turn(1*9);
+    forward(groesse*9);
+  end loop;
+end;
+
+ran: integer:=361;
+valid: boolean:=false;
+begin
+  turtle_reset;
+  while not valid loop
+    ran:=random(10,90);
+    if 360 mod ran=0 then valid:=true;
+    end if;
+  end loop;
+  for j in 1..5 loop
+    for i in 1..360/ran loop
+      turn_to(i*ran);
+      kreis(j);
+    end loop;
+  end loop;
+end;

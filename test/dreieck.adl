@@ -1,0 +1,46 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-13
+-- Idee: Rekursiv einpaar Dreiecke zeichnen.
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure dreieck is
+  
+  procedure _eck(kante : integer) is
+  begin
+    if kante /= 0 then
+      hilf(kante);
+      turn(60);
+      hilf(kante);
+      turn(-120);
+      hilf(kante);
+      turn(60);
+      hilf(kante);
+    end if;
+  end;
+  
+  procedure hilf(kante : integer) is
+  begin
+    forward(kante / 2);
+    _eck(kante / 2);
+    forward(kante / 2);
+  end;
+
+begin
+  turtle_reset;
+  
+  _eck(2*2*2*2);
+  
+  pen_up;
+  move_to(0,0);
+  pen_down;
+  
+  turn(180);
+  for i in 1..3 loop
+    _eck(2*2*2*2);
+    turn(120);
+  end loop;
+end;

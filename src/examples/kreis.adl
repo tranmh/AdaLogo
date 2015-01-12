@@ -1,0 +1,17 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-13
+-- Idee: Einen Kreis zeichnen mit Hilfe einer einfachen for-Schleife.
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure kreis is
+begin
+  turtle_reset;
+  for i in 1..360 loop
+    turn(1);
+    forward(1);
+  end loop;
+end;

@@ -1,0 +1,45 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-13
+-- Idee:  Zeichen vom Schachbrett.
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure schachbrett is
+
+  procedure quadrat(laenge : integer) is
+  begin
+    for i in reverse 1..laenge loop
+      for j in 1..3 loop
+        forward(i);
+        turn(90);
+      end loop;
+    end loop;
+  end;
+
+  laenge:integer:=20;
+  
+begin
+
+  turtle_reset;
+
+  for i in 1..4 loop
+    forward(8*laenge);
+    turn(90);
+  end loop;
+
+  for k in 0..7 loop
+    for i in reverse 0..3 loop
+      turn_to(0);
+      pen_up;
+      if (k mod 2)=0 then move_to(laenge*k,laenge*i*2);
+      else move_to(laenge*k,laenge*i*2+laenge);
+      end if;
+      pen_down;
+      quadrat(laenge);
+    end loop;
+  end loop;
+  
+end;

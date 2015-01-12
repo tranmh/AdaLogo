@@ -1,0 +1,25 @@
+ with adalogo;
+use adalogo;
+
+procedure dummy is
+    procedure quadrat_2(do_it : boolean) is
+    begin
+      if do_it then
+        for i in 1..4 loop
+            forward(50);
+            turn(90);
+        end loop;
+      end if;
+    end;
+    a : integer := 20;
+    b : boolean := true;
+begin
+    -- DEBUG Grammatik FIXME
+    -- b ist IntegerIdentifier, wegen
+    -- Grammatik mehrdeutig.
+    quadrat_2(b);
+
+    -- hier stimmt auch irgendwas nicht. FIXME
+    -- ambiguity of the grammar
+    --quadrat_2(a,b or true);
+end;

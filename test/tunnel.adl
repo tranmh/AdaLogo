@@ -1,0 +1,42 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-13
+-- Idee: tunnel oder 4-seitige pyramide
+-------------------------------------------------------------------------------
+
+
+with adalogo;
+use adalogo;
+
+procedure tunnel is
+  procedure rechteck(kante1:integer; kante2 : integer) is
+  begin
+    
+    for i in 1..4 loop
+      if i mod 2=1 then forward(kante1);
+      else forward(kante2);
+      end if;
+      turn(90);
+    end loop;
+    if kante2>50 then
+      for i in 1..kante2/50 loop
+        pen_up;
+        forward(1);
+        turn(90);
+        forward(1);
+        pen_down;
+        turn(-90);
+        
+      end loop;
+      rechteck(kante1-kante2/50*2,kante2-kante2/50*2);
+      
+    end if;
+  end;
+begin
+  turtle_reset;
+  pen_up;
+  move_to(-4000, -4000);
+  pen_down;
+  rechteck(4000, 4000);
+  
+end;

@@ -1,0 +1,32 @@
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  
+  a:integer:=1;
+  b:integer:=2;
+  
+  c:boolean:=false;
+  d:boolean:=true;
+  
+  --a:integer; --fehlermeldung
+  --b:boolean; --fehlermeldung
+  
+  --e:integer:=true; --fehlermeldung
+  --f:boolean:=2; --fehlermeldung
+  
+begin
+  
+  a:=1;
+  a:=a+1;
+  a:=a+b;
+  a:=a+b+1;
+  --a:=a or true; --fehlermeldung
+  
+  c:=true;
+  c:=c or true;
+  c:=c or d;
+  c:=c or d or true;
+  --c:=c or 1; --fehlermeldung
+
+end;

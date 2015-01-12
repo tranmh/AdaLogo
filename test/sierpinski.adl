@@ -1,0 +1,108 @@
+-------------------------------------------------------------------------------
+-- Autor: AdaLogoTeam
+-- Datum: 2005-08-16
+-- Idee:  Zeichnen von Sierpinski-Teppich 	
+-------------------------------------------------------------------------------
+
+with adalogo;
+use adalogo;
+
+procedure sierpinski is
+
+  a_x : integer := 0;
+  a_y : integer := 0;
+  
+  b_x : integer;
+  b_y : integer;
+  
+  axy : integer := 1;
+  
+  lengthf :integer := 8; -- schrittlaenge startwert
+  direction : integer := 90; -- richtung in grad
+  rotation : integer := 90; -- drehung in grad
+  
+  procedure teppich(instruction : integer; depth : integer) is 
+  
+    p : integer := 0;
+    q : integer := 0;
+  
+  begin 
+    if depth = 0 then
+      null;
+    else 
+      depth := depth - 1;
+    
+      -- F
+      -- F -> F+F-F-FF-F-F-MF := 0
+      -- M -> MMM := 1
+      -- + := 3
+      -- - := 4
+      if instruction = 0 or instruction = 1 then
+      
+        if instruction = 0 then
+          teppich(0,depth); -- F
+          teppich(3,depth); -- +
+          teppich(0,depth); -- F
+          teppich(4,depth); -- -
+          teppich(0,depth); -- F
+          teppich(4,depth); -- -
+          teppich(0,depth); -- F
+          teppich(0,depth); -- F
+          teppich(4,depth); -- -
+          teppich(0,depth); -- F
+          teppich(4,depth); -- -
+          teppich(0,depth); -- F
+          teppich(4,depth); -- -
+          teppich(1,depth); -- M
+          teppich(0,depth); -- F
+        elsif instruction = 1 then
+          teppich(1,depth); -- M
+          teppich(1,depth); -- M
+          teppich(1,depth); -- M
+        else
+          put_line("This should never happen.");
+        end if;
+      
+        if depth = 0 then
+          if direction = 0 then
+            p := lengthf;
+            q := 0;
+          elsif direction = 90 then
+            p := 0;
+            q := lengthf;
+          elsif direction = 180 then
+            p := -lengthf;
+            q := 0;
+          elsif direction = 270 then
+            p := 0;
+            q := -lengthf;
+          else
+            put_line("This should never happen!");
+          end if;
+          
+          b_x := a_x + p;
+          b_y := a_y + q;
+          
+          move_to(b_x,b_y);
+          
+          a_x := b_x;
+          a_y := b_y;
+          
+        end if;
+        
+      elsif instruction = 3 then
+        direction := (direction + rotation) mod 360;
+        
+      elsif instruction = 4 then
+        direction := (direction - rotation) mod 360;
+        
+      else
+        put_line("This should never happen!");
+      end if;
+    end if;
+  end;
+
+begin
+  turtle_reset;
+  teppich(0,5);
+end;

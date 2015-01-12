@@ -1,0 +1,50 @@
+with adalogo;
+use adalogo;
+
+procedure NONAME is
+  a:integer:=1;
+  b:integer:=5;
+begin
+  
+--  for i in i..i loop --fehlermeldung
+--    null;
+--  end loop;
+  
+  for i in 1..5 loop
+    put(i); put(".");
+  end loop;
+  new_line;
+  
+  for i in a..b loop
+    put(i); put(".");
+  end loop;
+  new_line;
+  
+  for i in a-5..b+5 loop
+    put(i); put(".");
+  end loop;
+  new_line;
+  
+  for a in 1..2 loop
+    put(a); put(".");
+  end loop;
+  new_line;
+
+  for i in a..b loop
+    for i in 1..2 loop
+      put(i); put(".");
+    end loop;
+  end loop;
+  new_line;
+  
+  for i in 1..10 loop
+    for j in 1..10 loop
+      put("j");
+      if j>=2 then exit; end if;
+    end loop;
+    put("i");
+    if i>=2 then exit; end if;
+  end loop;
+  new_line;
+
+end;
