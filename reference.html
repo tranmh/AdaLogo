@@ -1,0 +1,655 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>AdaLogo</title> 
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <meta name="Content-Language" content="de" />
+   <meta name="author" content="Minh Cuong Tran" /> 
+   <meta name="KeyWords" content="programming, ada, ada95, programmieren, uni stuttgart, informatik, adalogo" /> 
+   <meta name="Description" content="AdaLogo wurde im Rahmen des Softwarepraktikum an der
+        Uni Stuttgart im SS 2005 erstellt. Ziel des Projektes war es, den Programmieranfaenger
+        die Programmiersprache Ada ueber die Idee von 'Logo' nahe zu bringen." />
+    <link href="css/print.css" rel="stylesheet" type="text/css" media="print" /> 
+    <link href="css/screen.css" rel="stylesheet" type="text/css" media="screen, projection" /> 
+    <!--[if lte IE 6]><link rel="stylesheet" href="css/ielte6.css" type="text/css" media="screen" /><![endif]-->
+ </head>
+ <body>
+
+ <form action="javascript:AdaLogoStart();">
+ <div id="container"> <!-- Ist dazu da alles in einem Rahmen zu halten. -->
+  <a class="skip" href="#main">Navigation &Uuml;erspringen</a> <!-- Für Blinde die nicht bei jedem aufruf die gleichen Infos hören wollen sondern gleich zum Inhalt der Seite weitergehen wollen. -->
+  <div id="logo">
+   <a href="./index.html">Ada<span>Logo</span></a>
+  </div>
+  <ul id="menu">
+   <li><a href="index.html">Home</a></li>
+   <li><a href="download.html">Download</a></li> 
+   <li><a href="reference.html">Reference</a></li>
+   <li><a href="userguide.html">UserGuide</a></li>
+   <li><a href="adalogoteam.html">AdaLogoTeam</a></li>
+   <!--<li><a href="english.html">English</a></li>-->
+  </ul>
+
+<script type="text/javascript">
+var fenster;
+
+function AdaLogoStart()
+{
+fenster = window.open (
+"",
+"NeuesFenster", // Name des neuen Fensters
++"toolbar=1" // Toolbar
++",location=1" // Adress-Leiste
++",directories=1" // Zusatzleisten
++",status=1" // Statusleiste
++",menubar=1" // Menü
++",scrollbars=1" // Scrollbars
++",resizable=1" // Fenstergrösse veränderbar?
++",width=650" // Fensterbreite in Pixeln
++",height=400" // Fensterhöhe in Pixeln
+);
+
+fenster.moveTo(
+150, // X-Koordinate
+200 // Y-Koordinate
+); // der linken oberen Ecke
+
+fenster.location.href = "adalogo.html";
+//Dateiname und Pfad der Datei, die angezeigt werden soll
+}
+
+function AdaLogoWebStart()
+{
+fenster = window.open (
+"",
+"NeuesFenster", // Name des neuen Fensters
++"toolbar=1" // Toolbar
++",location=1" // Adress-Leiste
++",directories=1" // Zusatzleisten
++",status=1" // Statusleiste
++",menubar=1" // Menü
++",scrollbars=1" // Scrollbars
++",resizable=1" // Fenstergrösse veränderbar?
++",width=650" // Fensterbreite in Pixeln
++",height=400" // Fensterhöhe in Pixeln
+);
+
+fenster.moveTo(
+150, // X-Koordinate
+200 // Y-Koordinate
+); // der linken oberen Ecke
+
+fenster.location.href = "adalogo.jnlp";
+//Dateiname und Pfad der Datei, die angezeigt werden soll
+}
+
+
+</script>
+
+  <dl id="subnav"> <!-- Diese Subnavigation kann vom Inhalt verändert werden. Sie wird nicht ausgedruckt. -->
+   <dt>
+        <button name="KlickmichAppletStart" type="button"
+        value="AdaLogoStart" onClick="javascript:AdaLogoStart();">
+        <b>AdaLogo &nbsp;starten&nbsp;&nbsp;</b>
+        </button>
+        <!--
+        <br />
+	<button name="KlickmichWebstart" type="button"
+	value="AdaLogoWebstart" onClick="javascript:AdaLogoWebStart();">
+	<b>AdaLogo Webstart</b>
+	</button>
+	-->
+    <br /><br />
+    <b>Wilkommen</b> auf der Seite von AdaLogo!
+    
+   </dt>
+    <dd>
+        Kontakt:
+   </dd>
+   <dd>
+	<img src="img/spamschutzbild_1.png" width="153" height="25" alt="mail an uns" />
+    </dd>
+    <dd>
+        <a href="adalogoteam.html" alt="Wir"><img src="img/team.jpg" alt="AdaLogoTeam" style="width: 120px; height: 108px;" /></a>
+    </dd>
+   <dt>Aktuelles:</dt>
+    <dd> 
+        21.10.2005 Programmaktualisierung
+    </dd>
+    <dd> 
+        17.11.2006
+        Homepage&auml;nderung
+    </dd>
+   <dt>
+        &copy; 
+        2011
+        <a href="adalogoteam.html">AdaLogoTeam</a>
+
+   </dt>
+   <!--
+   <dt>
+    <img src="/web/20110719112202/http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid XHTML 1.0 Strict" style="border:0;width:88px;height:31px" />
+    <img style="border:0;width:88px;height:31px"
+       src="/web/20110719112202/http://jigsaw.w3.org/css-validator/images/vcss" 
+       alt="Valid CSS!" />
+   </dt>
+   -->
+  </dl>
+  
+
+<div id="main">
+<!-- CONTENT BEGIN -->
+  
+  
+<h1>Reference</h1> <!-- Hier sollte die Überschrift für die einzelne Seite rein. Auch sehr wichtig für Suchmaschinen. -->
+
+<a name="punkt1"></a>
+<h2>1. Die ersten Schritte</h2>
+<p>Machen Sie sich als erstes mit den Grundbefehlen in 
+AdaLogo vertraut. Gehen Sie dazu auf <i>Examples/befehle.adl</i>
+und f&uuml;hren Sie die Befehle im Editor-Fenster durch
+<i>"step by step"</i> aus. Lesen Sie dazu die Kommentaren
+und beobachten Sie was die Schildkr&ouml;te macht.</p>
+<p>Alle Grundbefehle, die direkt Auswirkungen auf
+die Schildkr&ouml;te haben, sind:</p>
+
+<pre>
+forward(100);
+move_to(200,200);
+new_line;
+pen_up;
+pen_down;
+put_line("hallo");
+put(100);
+turtle_reset;
+turn(90);
+turn_to(225);
+</pre>
+
+<p>Nat&uuml;rlich kann innerhalb der Klammer eine beliebige
+ganze Zahl stehen, ja sogar noch mehr. AdaLogo kann auch
+rechnen, dazu kommen wir jedoch im <a href="#punkt3">Punkt 3</a>. <br />
+<i>put</i> und <i>put_line</i> akzeptieren au&szlig;er Zahlenausdr&uuml;cke
+(<a href="#punkt3">siehe 3.</a>) und logische Operationen 
+(<a href="#punkt4">siehe 4.</a>) auch Zeichenketten. In einer Zeichenkette
+d&uuml;rfen beliebige Buchstaben auftauchen au&szlig;er Anf&uuml;hrungszeichen
+("). <i>put</i> und <i>put_line</i> werten diese Ausdr&uuml;cke aus
+und geben die Auswertung in der Konsole aus. <i>new_line;</i> schreibt
+eine neue leere Zeile in die Konsole.<br />
+Mit diesen Befehlen k&ouml;nnen Sie bereits den ersten Buchstaben 
+Ihres Namen zeichnen. Versuchen Sie es doch einmal!
+</p>
+
+<a name="punkt2"></a>
+<h2>2. Der "Rahmen"</h2>
+<p>W&auml;hlen Sie bitte <i>Examples/template.adl</i> aus. 
+Bevor Sie beginnen, sollten Sie doch mit folgenden Sprachkonstrukten 
+vertraut sein:
+</p>
+<ul>
+	<li>Kommentare k&ouml;nnen geschrieben werden und eine Zeile mit
+		einem Kommentar f&auml;ngt mit -- an. Alles, was danach geschrieben
+		wird, wird vom Interpreter ignoriert.</li>
+	<li>Es geh&ouml;rt zum guten Programmierstil, dass Sie die Zeilen
+		<i>Autor, Datum und Idee</i> ausf&uuml;llen. </li>
+	<li>Prozeduren- und Variabel-Deklarationen werden innerhalb von 
+		<i>is</i> und <i>begin</i> geschrieben, dazu siehe <a href="#punkt7">Punkt 7</a>.</li>
+	<li>Das eigentliche Programm liegt zwischen <i>begin</i> und 
+		<i>end;</i> Hier k&ouml;nnen bereits die Befehle aus <a href="#punkt1">Punkt 1</a> 
+		eingetragen werden.</li>
+	<li>Wie im Sinne Ada mit "<b>package</b>", so muss auch in AdaLogo
+		das <i>package</i>  adalogo eingebunden werden mit 
+<pre>
+with adalogo;
+use adalogo;
+</pre>
+		Diese zwei Anweisungen m&uuml;ssen vor <i>procedure</i> stehen.
+	</li>
+	<li>Gew&ouml;hnen Sie sich an, bitte eine sinnvollen Namen f&uuml;r
+		das Programm zu geben und <i>NONAME</i> zu ersetzen.
+		Falls Sie die Datei abspeichern, so soll der Dateiname
+		mit der Endung *.adl wie die Prozedur gew&auml;hlt sein, z.B.:
+	<pre>
+<b>procedure</b> mein_erstes_adalogo_programm <b>is</b>
+<b>begin</b>
+  <b>null;</b>
+<b>end;</b>
+	</pre>
+	Der Name f&uuml;r die Datei lautet dann <i>mein_erstes_adalogo_programm.adl</i>
+	</li>
+</ul>
+
+
+<a name="punkt3"></a>
+<h2>3. Der "Taschenrechner"</h2>
+<p>Sie k&ouml;nnen nicht nur forward(100); mit einer einfachen ganzen Zahl 
+schreiben, sondern Sie k&ouml;nnen mit AdaLogo auch Berechnungen anstellen. Anstelle
+von 100 k&ouml;nnen Sie auch Folgendes schreiben, wobei x und y Element der ganzen
+Zahlen sein darf.</p>
+<ul>
+   <li><b>-x</b> bildet das Inverse zu x.</li> 
+	<li><b>x + y</b> Addition</li>
+	<li><b>x - y</b> Subtraktion</li>
+	<li><b>x * y</b> Multiplikation</li>
+	<li><b>x / y</b> (Vorsicht, y ungleich 0) Division</li>
+	<li><b>x mod y</b> (Vorsicht, y ungleich 0) 
+		<a href="/web/20110719112202/http://www.grammatech.com/rm95html-1.0/rm9x-04-05-05.html#27">Modulo</a></li>
+	<li><b>x rem y</b> (Vorsicht, y ungleich 0) <a href="/web/20110719112202/http://www.grammatech.com/rm95html-1.0/rm9x-04-05-05.html#27">Remainder</a></li>
+	<li><b>turtle_x</b> liefert den x-Wert von Stelle, an der sich die Schildkr&ouml;te befindet.</li>
+	<li><b>turtle_y</b> liefert den y-Wert von Stelle, an der sich die Schildkr&ouml;te befindet.</li>
+        <li><b>turtle_dir</b> liefert die Richtung, in der die Schildkr&ouml;te gerade zeigt.</li>
+	<li><b>min(x,y)</b> liefert die kleinere Zahl von x und y.</li>
+	<li><b>max(x,y)</b> liefert die gr&ouml;&szlig;ere Zahl von x und y.</li>
+	<li><b>random(x,y)</b> liefert eine zuf&auml;llige Zahl zwischen x und y, wobei
+		nicht zwingend y > x gelten muss. Die untere Grenze geh&ouml;rt dazu, die obere jedoch nicht.
+		Z.B. liefert random(2,6) zuf&auml;llige Zahlen von der Menge {2,3,4,5}.</li>
+</ul>
+<p>AdaLogo rechnet dabei "Punkt vor Strich". <i>* / mod</i> und <i>rem</i> binden "st&auml;rker" 
+und werden zuerst ausgerechnet, danach kommen <i>+</i> und <i>-</i> . Inversebildung
+bindet am "st&auml;rksten".
+Wollen Sie bei einem Ausdruck <i>a + b * c</i>, dass a + b zuerst ausgerechnet wird,
+so m&uuml;ssen Sie f&uuml;r die richtige Klammerung sorgen:</p>
+<pre>(a + b) * c</pre>
+<p>Nat&uuml;rlich ist es m&ouml;glich diese Operationen auf der Menge der ganzen Zahlen
+beliebig zu kombinieren.</p>
+<p>Anstelle von x und y ist es auch m&ouml;glich Variabel-Namen aufzurufen, falls
+diese vorher im Deklarationsbereich definiert wurden. Dazu siehe <a href="#punkt7">Punkt 7</a>.</p>
+
+<a name="punkt4"></a>
+<h2>4. Logik</h2>
+<p>AdaLogo unterst&uuml;tzt die zweiwertige Logik mit <b>true</b> und <b>false</b>.
+Logische Werte a und b k&ouml;nnen mit folgenden Operationen verkn&uuml;pft werden:
+</p>
+<ul>
+   <li><b>a or b</b> gibt <b>true</b> zur&uuml;ck, falls a oder b true ist, andernfalls 
+   	<b>false</b>. (siehe <a href="/web/20110719112202/http://de.wikipedia.org/wiki/Disjunktion">Wikipedia</a>)</li>
+   <li><b>a and b</b> gibt <b>true</b> zur&uuml;ck, falls a und b true ist, andernfalls 
+   	<b>false</b>. (siehe <a href="/web/20110719112202/http://de.wikipedia.org/wiki/Konjunktion_%28Logik%29">Wikipedia</a>)</li>
+   <li><b>not a</b> bildet das Inverse zu a.</li> 
+</ul>
+<p>Zu beachten ist, dass <b>not</b> am "st&auml;rksten" bindet, danach <b>and</b>
+und dann <b>or</b>. M&ouml;chten Sie diese Bindung anders, so muss entsprechend 
+Klammer gesetzt werden.
+Hier Beispiele: 
+</p>
+<pre>
+not(a or b) and c 
+-- Zuerst <i>a or b</i>, dann <i>not</i> und danach <i>and</i>.
+(a or not b) and (c or d) 
+-- Zuerst <i>not</i>, danach beide Klammer und dann <i>and</i>.
+</pre>
+<p>Anstelle von a und b ist es auch m&ouml;glich Variabel-Namen aufzurufen, falls
+diese vorher im Deklarationsbereich definiert wurden. Dazu siehe <a href="#punkt7">Punkt 7</a>.</p>
+
+<a name="punkt5"></a>
+<h2>5. Vergleichsoperationen</h2>
+<p>In AdaLogo gibt es folgende Vergleichsoperationen. Verglichen werden x und y, wobei
+diese <a href="#punkt3">die Bedingung aus 3.</a> erf&uuml;llen m&uuml;ssen. Das Ergebnis ist <b>true</b>
+oder <b>false</b> und entspricht <a href="#punkt4">die Definition von 4.</a></p>
+<ul>
+   <li><b>a = b</b> ergibt <b>true</b> falls a den gleichen Wert hat wie b, andernfalls <b>false</b>.</li> 
+   <li><b>a /= b</b> ergibt <b>true</b> falls a nicht den gleichen Wert hat wie b, andernfalls <b>false</b>.</li> 
+   <li><b>a &gt; b</b> ergibt <b>true</b> falls a gr&ouml;&szlig;er ist als b, andernfalls <b>false</b>.</li> 
+   <li><b>a &gt;= b</b> ergibt <b>true</b> falls a ist gr&ouml;&szlig;er oder gleich b, andernfalls <b>false</b>.</li> 
+   <li><b>a &lt; b</b> ergibt <b>true</b> falls a kleiner ist als b, andernfalls <b>false</b>.</li> 
+   <li><b>a &lt;= b</b> ergibt <b>true</b> falls a ist kleiner oder gleich b, andernfalls <b>false</b>.</li> 
+</ul>
+<p>Ergebnisse von Vergleichsoperationen k&ouml;nnen in <a href="#punkt4">4.</a> als ein Logikausdruck verwendet werden.
+Z.B. ist <i>a &lt; b or c &gt;= d</i> zul&auml;ssig.</p>
+
+<a name="punkt6"></a>
+<h2>6. Sprachkonstrukte</h2>
+<p>F&uuml;r "null", bedingte, wiederholte und Sprung-Anweisungen existieren folgende
+Sprachelemente: </p>
+<h3>6.1 null;</h3>
+<p><b>null;</b> - diese Anweisung macht und schlicht und einfach gar nichts. 
+Sie ist nur wichtig, um leere Prozeduren oder Konstrukte zu schreiben. In Ada(Logo)
+wird oft nach mindestens einer Anweisung verlangt, falls Sie keine Anweisung ausf&uuml;hren
+m&ouml;chten, so benutzen Sie <pre>null;</pre>
+</p>
+
+<h3>6.2 if</h3>
+<p>So sieht z.B. eine bedingte Anweisung mit <b>if</b> aus:</p>
+<pre>
+<b>if</b> a <b>then</b>
+  -- hier anweisungen1
+<b>elsif</b> b <b>then</b>
+  -- hier anweisungen2
+<b>elsif</b> c <b>then</b>
+  -- hier anweisungen3
+<b>else</b>
+  -- hier anweisungen4
+<b>end if</b>;  
+</pre>
+
+<p>Der if-Teil mit Anweisungen sowie <b>end if;</b> muss genau 1 Mal da sein.
+Der elsif-Teil mit Anweisungen kann 0 Mal, 1 Mal oder beliebig oft benutzt werden.
+Der else-Teil mit Anweisungen kann 0 Mal oder 1 Mal verwendet werden.</p>
+<p>Anstelle von a, b, oder c kann alles, was in <a href="#punkt4">4.</a> und 
+<a href="#punkt5">5.</a> genannt wurde,
+verwendet werden. Bei den Anweisungen muss mindestens ein Element aus <a href="#punkt1">1.</a>, 
+<a href="#punkt6">6.</a> oder <a href="#punkt8">8.</a> verwendet werden.</p>
+
+<p>Logisch betrachtet wird Folgendes gemacht:</p>
+<ul>
+	<li>Wenn a wahr ist, dann werden anweisungen1 ausgef&uuml;hrt. 
+		Der Rest wird ignoriert.</li>
+	<li>Wenn a falsch ist und b ist richtig, dann werden anweisungen2 ausgef&uuml;hrt. 
+		Der Rest wird ignoriert.</li>
+	<li>Wenn a und b falsch sind und c ist richtig, dann werden anweisungen3 ausgef&uuml;hrt. 
+		Der Rest wird ignoriert.</li>
+	<li>...</li>
+	<li>Wenn alles davor falsch war, dann f&uuml;hre anweisungen4 durch.</li>
+</ul>
+
+
+<h3>6.3 for</h3>
+<p>So sieht eine for-Schleife aus:</p>
+<pre>
+<b>for</b> i <b>in</b> a <b>..</b> b loop
+  -- hier anweisungenX
+<b>end loop</b>;
+</pre>
+<p>Die Werte a und b k&ouml;nnen alles aus <a href="#punkt3">3.</a> sein. Bei den 
+Anweisungen muss mindestens ein Element aus <a href="#punkt1">1.</a>, 
+<a href="#punkt6">6.</a> oder <a href="#punkt8">8.</a> verwendet werden.</p>
+<p>F&uuml;r den Namen der Variabel <i>i</i> gilt <a href="#punkt7">7.</a> Mit der for-Schleife wird
+ein neuer "Block" aufgemacht. Existiert schon vorher eine Variabel mit dem gleichen
+Namen, so wird diese von der neuen Variabel "&uuml;berdeckt" und ist nicht mehr
+"sichtbar". </p>
+
+<p>Semantisch gesehen werden die anweisungenX (b - a + 1) Mal gemacht. 
+Ist die Differenz von b - a kleiner als 0, so werden die anweisungenX 
+gar nicht ausgef&uuml;hrt. 
+</p>
+
+<p>Die Variabel <i>i</i> erh&auml;lt am Anfang den Wert von a und wird nach jedem 
+Schleifendurchlauf um 1 erh&ouml;ht. <br />
+Verwenden Sie:
+</p>
+<pre>
+<b>for</b> i <b>in reverse</b> a <b>..</b> b loop
+  -- hier anweisungenX
+<b>end loop</b>;
+</pre>
+<p>so erh&auml;lt die Variabel <i>i</i> am Anfang den Wert b und nach jeder
+Schleifendurchlauf wird sie um 1 erniedrigt.</p>
+
+
+
+<h3>6.4 loop</h3>
+<p>So sieht eine loop-Schleife aus:
+</p>
+
+<pre>
+<b>loop</b>
+  --hier anweisungenY
+<b>end loop</b>;
+</pre>
+<p>Bei den Anweisungen muss mindestens ein Element aus <a href="#punkt1">1.</a>, 
+<a href="#punkt6">6.</a> oder <a href="#punkt8">8.</a> verwendet werden.
+Semantisch gesehen werden die anweisungenY unendlich oft ausgef&uuml;hrt. Seien
+Sie bitte vorsichtig, Sie k&ouml;nnen das Programm zum abst&uuml;rzen bringen.
+Wie Sie trotzdem bedingt/unbedingt abbrechen k&ouml;nnen, lesen Sie bitte
+<a href="#punkt6.5">6.5.</a> und <a href="#punkt6.6">6.6.</a>
+</p>
+
+<a name="punkt6.5"></a>
+<h3>6.5 while</h3>
+<p>So sieht eine while-Schleife aus:</p>
+<pre>
+<b>while</b> a <b>loop</b>
+  -- hier anweisungenZ
+<b>end loop</b>;
+</pre>
+<p>Anstelle von a muss ein Element aus <a href="#punkt4">4.</a>
+ oder <a href="#punkt5">5.</a> stehen. 
+Falls a wahr ist, so werden anweisungenZ ausgef&uuml;hrt. 
+Danach wird auf dem Wahrheitswert von a wieder &uuml;berpr&uuml;ft
+und falls wahr, anweisungenZ wieder ausgef&uuml;hrt etc.
+Falls der Wahrheitswert von a sich nicht nie &auml;ndert, so erreichen Sie
+den gleichen Effekt mit der loop-Schleife. Falls a nicht mehr zutrifft,
+so wird abgebrochen.
+</p>
+
+<a name="punkt6.6"></a>
+<h3>6.6 exit</h3>
+<p><b>exit;</b> - Mit <i>exit;</i> springen Sie unbedingt oder falls
+Sie eine if-Anweisung um Ihr exit; bauen bedingt aus einer for-, while- 
+oder loop-Schleife heraus.
+</p>
+<p>Versuchen Sie bitte <i>exit;</i> so gut wie m&ouml;glich zu vermeiden.
+Das Verwenden von <i>exit;</i> geh&ouml;rt zum schlechten Programmierstil
+und wird normalerweise im Programmierkurs I und II verboten.
+<br /> <i>exit;</i> nicht innerhalb einer Schleife zu verwenden ist in Ada(Logo) falsch.
+</p>
+<p>Wenn Sie z.B. eine doppelte Schleife benutzen und innerhalb der inneren Schleife <i>exit;</i>
+benutzen, so wird nur die innere Schleife abgebrochen, die &auml;u&szlig;ere wird jedoch
+weiter ausgef&uuml;hrt. <i>exit;</i> springt immer bis zur n&auml;chsten Schleife, die
+ihm umgibt.
+</p>
+
+<a name="punkt7"></a>
+<h2>7. Prozedur- und Variabel-Deklarationen</h2>
+<h3>7.1. Variabel-Deklarationen</h3>
+<p>In AdaLogo gibt es (im Vergleich zu Ada nur) 2 Datentypen
+<b>integer</b> und <b>boolean</b>. Variablen von Typ <b>integer</b> oder <b>boolean</b>
+werden im Deklarationsblock definiert und k&ouml;nnen sp&auml;ter verwendet werden. 
+Hier Beispiele f&uuml;r Variabel-Deklarationen:
+</p>
+<ul>
+	<li> a : <b>integer</b> := -10; -- bsp1</li>
+	<li> b : <b>integer</b>; -- bsp2</li>
+	<li> c : <b>boolean</b> := <b>true</b>; -- bsp3</li>
+	<li> d : <b>boolean</b>; -- bsp4</li>
+</ul>
+
+<p>In Beispiel 1 und 2 werden <b>integer</b> (ganze Zahlen) definiert. a bekommt in Beispiel 1 sofort
+den Wert -10 zugewiesen, w&auml;hrend b keinen Wert bekommt. In Beispiel 3 und 4 werden
+die Variablen c und d als <b>boolean</b> definiert. c hat sofort den Wert <b>true</b>,
+d jedoch bleibt unbestimmt.</p>
+
+<p>
+Vorsicht: falls sp&auml;ter auf
+die Variabel b und d zugegriffen werden, ohne dass b und d jemals einen konkreten Wert zugewiesen 
+bekommen, so haben die Variablen b und d wie in Ada einen <b>zuf&auml;lligen</b> Wert - 
+das kann zu schweren Nebeneffekten 
+f&uuml;hren!</p>
+
+<a name="punkt7.2"></a>
+<h3>7.2. Prozedur-Deklarationen</h3>
+<p>Hier Beispiele, wie Prozeduren definiert werden:</p>
+<pre>
+-- bsp1:
+<b>procedure</b> line <b>is</b>
+  -- Deklarationen hier
+<b>begin</b> 
+  pen_down;
+  forward(100);
+  turn(180);
+  forward(100);
+  turn(180);
+<b>end</b>;
+
+-- bsp2:
+<b>procedure</b> quadrat (seitenlaenge : integer) <b>is</b>
+  -- Deklarationen hier
+<b>begin</b> 
+  pen_down;
+  <b>for</b> i <b>in</b> 1..4 <b>loop</b>
+    forward(seitenlaenge);
+    turn(90);
+  <b>end loop</b>;
+<b>end</b>;
+
+-- bsp3:
+<b>procedure</b> schwarzeflaeche 
+    (laenge : <b>integer</b>; breite : <b>integer</b>; do_it : <b>boolean</b>) <b>is</b>
+  -- Deklarationen hier
+<b>begin</b>
+  <b>if</b> do_it <b>then</b>
+    <b>for</b> l <b>in</b> 1..breite/2 <b>loop</b>
+      forward(laenge);
+      turn(90);
+      forward(1);
+      turn(90);
+  
+      forward(laenge);
+      turn(-90);
+      forward(1);
+      turn(-90);
+    <b>end loop</b>;
+  <b>end if</b>;
+<b>end</b>;
+</pre>
+
+<p>In Beispiel 1 wird eine einfache Linie gezeichnet. Die Prozedur line erh&auml;lt keine
+Eingabe-Parameter. Die Prozedur Quadrat erh&auml;lt als "in"-Parameter die Seitenl&auml;nge
+und zeichnet ein Quadrat mit dieser Seitenl&auml;nge. Innerhalb dieser Prozedur ist
+die Variabel seitenlaenge bekannt und sie wird dazu verwendet, um die Seitenl&auml;nge
+des Quadrates zu zeichnen. An Beispiel 3 k&ouml;nnen Sie erkennen, dass es auch mehrere Eingabe-Parameter
+sein k&ouml;nnen. Eingabe-Parameter k&ouml;nnen sowohl <b>integer</b> als auch <b>boolean</b>
+sein.
+</p>
+
+<p>Zwischen <b>is</b> und <b>begin</b> k&ouml;nnen weitere Deklarationen folgen.
+Unter anderem bedeutet das, dass Sie weitere Unter- und Unterprozeduren beliebig verschachtelt
+definieren k&ouml;nnen. 
+</p>
+
+<p>Variabel-Namen sind (wie in Ada) definiert:</p>
+<ul>
+	<li>Der erste Buchstabe muss ein Buchstabe (a-z) oder ein _ sein.</li>
+	<li>Die weiteren Buchstaben k&ouml;nnen Buchstaben (a-z), Zahlen (0-9) oder _ sein. </li>
+	<li>Gro&szlig;- und Kleinschreibung spielen keine Rolle.</li>
+	<li>Vorsicht: dabei sind Sonderzeichen, Umlaute oder &szlig; nicht erlaubt. Sie schreiben daher lieber
+	oe, ae, ue und ss.</li>
+        <li>Reservierte W&ouml;rter d&uuml;rfen nicht benutzt werden.</li>
+</ul>
+
+<p>
+Die <b>Sichtbarkeit</b> der Variablen und Prozeduren ist wichtig.<br />
+Folgende Zeilen sind g&uuml;ltig:
+<pre>
+a : integer := 10;
+b : integer := a * a;
+</pre>
+da <i>b</i> <i>a</i> bereits sehen kann.
+<br />Folgende Zeilen sind <b>nicht</b> g&uuml;ltig:
+<pre>
+a : integer := b * b
+b : integer := 10;
+</pre>
+da <i>b</i> f&uuml;r <i>a</i> noch nicht sichtbar ist.
+</p>
+
+<p>Die Sichtbarkeit von Prozeduren ist in AdaLogo <b>anders</b> als in Ada!<br />
+Folgende Zeilen ist in AdaLogo m&ouml;glich, in Ada jedoch nicht!
+<pre>
+<b>procedure</b> bla <b>is begin</b>
+  blubb;
+<b>end;</b>
+<b>procedure</b> blubb <b>is begin</b>
+  forward(100);
+<b>end;</b>
+</pre>
+</p>
+
+<a name="punkt8"></a>
+<h2>8. Wertzuweisungen und Prozedurenaufrufe</h2>
+<h3>8.1 Wertzuweisungen</h3>
+<p>Hier einpaar Beispiele:</p>
+<pre>
+a := 10; -- bsp1
+b := random(10,25); -- bsp2
+a := turtle_x; -- bsp3
+
+c := true; -- bsp4
+d := turtle_y &lt; a; -- bsp5
+</pre>
+
+<p>Beispiele 1, 2 und 3 sind Wertzuweisungen von <b>integer</b> Variablen,
+vorausgesetzt ist, dass diese Variablen a, b schon vorher im <a href="#punkt7">Deklarationsblock</a>
+definiert worden sind.
+</p>
+
+<p>Beispiele 4 und 5 sind Wertzuweisungen von <b>boolean</b>, auch hier ist 
+die Voraussetzung, dass diese schon vorher als <b>boolean</b> deklariert 
+worden sind.</p>
+
+<h3>8.2 Prozedur-Aufrufe</h3>
+<p>Hier einpaar Beispiele:</p>
+<pre>
+line; -- bsp1
+quadrat(4); -- bsp2
+schwarzeflaeche(a,10,true); -- bsp3
+</pre>
+<p>Diese 3 Beispiele beziehen sich auf <a href="#punkt7.2">7.2.</a>
+<br /><i>line;</i> ist eine Prozedur ohne Eingabe-Parameter, <i>quadrat</i> hat einen Eingabeparameter
+als <b>integer</b>, w&auml;hrend <i>schwarzeflaeche</i> 3 Eingabe-Parameter hat, wobei 
+die ersten 2 Parameter <b>integer</b> sind, der 3. Parameter ist von Typ <b>boolean</b>.
+</p>
+
+<p>Wurden die Prozeduren im Deklarationsbereich mit n Parametern (n &ge; 0) definiert, so 
+m&uuml;ssen sie beim Aufruf ebenfalls n Eingabe-Parameter bekommen, diese m&uuml;ssen vom
+Typ mit der Definition &uuml;bereinstimmen. </p>
+
+
+<a name="punkt9"></a>
+<h2>9. Rekursion</h2>
+<p>Folgende Zeilen sind ein Beispiel f&uuml;r Rekursion:
+<pre>
+<b>with</b> adalogo;
+<b>use</b> adalogo;
+
+<b>procedure</b> foobar <b>is</b>
+  <b>procedure</b> viele_quadrate(kante : integer) <b>is</b>
+  <b>begin</b>
+    <b>for</b> i <b>in</b> 1..4 <b>loop</b>
+      forward(kante);
+      turn(90);
+    <b>end loop;</b>
+
+    <b>if</b> kante > 42 <b>then</b>
+      viele_quadrate(kante-5);      
+    <b>elsif</b> kante < -84 <b>then</b>
+      <b>null;</b>
+    <b>else</b> 
+      viele_quadrate(kante-5);      
+    <b>end if; </b>
+  <b>end;</b>
+<b>begin</b>
+  viele_quadrate(84);
+  viele_quadrate(42);
+  turn(90);
+  viele_quadrate(84);
+  viele_quadrate(42);
+<b>end;</b>
+</pre>
+Innerhalb der Prozedur <i>viele_quadrate</i> ruft die Prozedur sich 
+selbst auf. Zu beachten ist, dass Sie f&uuml;r eine Abbruch-Bedingung
+sorgen m&uuml;ssen, da ansonsten eine endlose Rekursion entsteht. Ein anderes
+Beispiel f&uuml;r rekursives Aufrufen, finden Sie im Beispiel <i>hilbert</i>.
+Es ist auch m&ouml;glich zwei oder mehr Prozeduren zu definieren, die sich
+gegenseitig aufrufen. Entnehmen Sie aus der Informatik-Vorlesung, wann eine
+Prozedur A eine Prozedur B aufrufen kann und wann nicht. Hierbei spielt die
+Sichtbarkeit eine Rolle, die bei Unterprozeduren nicht immer gegeben sind.
+Die Sichtbarkeit zu erkl&auml;ren w&uuml;rde den Rahmen dieser Seite sprengen.
+</p>
+
+<!--
+<a name="punkt10"></a>
+<h2>10. To be continued</h2>
+-->
+
+
+
+<!-- CONTENT END -->
+</div>
+ </div>
+ </form>
+ </body>
+</html>
+

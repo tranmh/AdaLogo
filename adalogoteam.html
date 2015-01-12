@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+
+  <title>AdaLogo</title> 
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <meta name="Content-Language" content="de" />
+   <meta name="author" content="Minh Cuong Tran" /> 
+   <meta name="KeyWords" content="programming, ada, ada95, programmieren, uni stuttgart, informatik, adalogo" /> 
+   <meta name="Description" content="AdaLogo wurde im Rahmen des Softwarepraktikum an der
+        Uni Stuttgart im SS 2005 erstellt. Ziel des Projektes war es, den Programmieranfaenger
+        die Programmiersprache Ada ueber die Idee von 'Logo' nahe zu bringen." />
+    <link href="css/print.css" rel="stylesheet" type="text/css" media="print" /> 
+    <link href="css/screen.css" rel="stylesheet" type="text/css" media="screen, projection" /> 
+    <!--[if lte IE 6]><link rel="stylesheet" href="css/ielte6.css" type="text/css" media="screen" /><![endif]-->
+ </head>
+ 
+ <body>
+ <form action="javascript:AdaLogoStart();">
+ <div id="container"> <!-- Ist dazu da alles in einem Rahmen zu halten. -->
+  <a class="skip" href="#main">Navigation &Uuml;erspringen</a> <!-- Für Blinde die nicht bei jedem aufruf die gleichen Infos hören wollen sondern gleich zum Inhalt der Seite weitergehen wollen. -->
+  <div id="logo">
+   <a href="./index.html">Ada<span>Logo</span></a>
+  </div>
+  <ul id="menu">
+   <li><a href="index.html">Home</a></li>
+   <li><a href="download.html">Download</a></li> 
+   <li><a href="reference.html">Reference</a></li>
+   <li><a href="userguide.html">UserGuide</a></li>
+   <li><a href="adalogoteam.html">AdaLogoTeam</a></li>
+   <!-- <li><a href="english.html">English</a></li> -->
+  </ul>
+
+<script type="text/javascript">
+var fenster;
+
+function AdaLogoStart()
+{
+fenster = window.open (
+"",
+"NeuesFenster", // Name des neuen Fensters
++"toolbar=1" // Toolbar
++",location=1" // Adress-Leiste
++",directories=1" // Zusatzleisten
++",status=1" // Statusleiste
++",menubar=1" // Menü
++",scrollbars=1" // Scrollbars
++",resizable=1" // Fenstergrösse veränderbar?
++",width=650" // Fensterbreite in Pixeln
++",height=400" // Fensterhöhe in Pixeln
+);
+
+fenster.moveTo(
+150, // X-Koordinate
+200 // Y-Koordinate
+); // der linken oberen Ecke
+
+fenster.location.href = "adalogo.html";
+//Dateiname und Pfad der Datei, die angezeigt werden soll
+}
+
+function AdaLogoWebStart()
+{
+fenster = window.open (
+"",
+"NeuesFenster", // Name des neuen Fensters
++"toolbar=1" // Toolbar
++",location=1" // Adress-Leiste
++",directories=1" // Zusatzleisten
++",status=1" // Statusleiste
++",menubar=1" // Menü
++",scrollbars=1" // Scrollbars
++",resizable=1" // Fenstergrösse veränderbar?
++",width=650" // Fensterbreite in Pixeln
++",height=400" // Fensterhöhe in Pixeln
+);
+
+fenster.moveTo(
+150, // X-Koordinate
+200 // Y-Koordinate
+); // der linken oberen Ecke
+
+fenster.location.href = "adalogo.jnlp";
+//Dateiname und Pfad der Datei, die angezeigt werden soll
+}
+
+
+</script>
+
+  <dl id="subnav"> <!-- Diese Subnavigation kann vom Inhalt verändert werden. Sie wird nicht ausgedruckt. -->
+   <dt>
+        <button name="KlickmichAppletStart" type="button"
+        value="AdaLogoStart" onClick="javascript:AdaLogoStart();">
+        <b>AdaLogo &nbsp;starten&nbsp;&nbsp;</b>
+        </button>
+        <!--
+        <br />
+	<button name="KlickmichWebstart" type="button"
+	value="AdaLogoWebstart" onClick="javascript:AdaLogoWebStart();">
+	<b>AdaLogo Webstart</b>
+	</button>
+	-->
+    <br /><br />
+    <b>Wilkommen</b> auf der Seite von AdaLogo!
+    
+   </dt>
+    <dd>
+        Kontakt:
+   </dd>
+   <dd>
+	<img src="img/spamschutzbild_1.png" width="153" height="25" alt="mail an uns" />
+    </dd>
+    <dd>
+        <a href="adalogoteam.html" alt="Wir"><img src="img/team.jpg" alt="AdaLogoTeam" style="width: 120px; height: 108px;" /></a>
+    </dd>
+   <dt>Aktuelles:</dt>
+    <dd> 
+        21.10.2005 Programmaktualisierung
+    </dd>
+    <dd> 
+        17.11.2006
+        Homepage&auml;nderung
+    </dd>
+   <dt>
+        &copy; 
+        2011
+        <a href="adalogoteam.html">AdaLogoTeam</a>
+        
+   </dt>
+  </dl>
+  
+
+<div id="main">
+<!-- CONTENT BEGIN -->
+  
+  
+<h1>AdaLogoTeam</h1> <!-- Hier sollte die Überschrift für die einzelne Seite rein. Auch sehr wichtig für Suchmaschinen. -->
+
+
+<p>Wir sind zu dritt:</p>
+<ul>
+	<li>Thai, Hailang. VarMonitor und Debug-Fenster</li>
+	<li>Tran, Minh Cuong. HTML-Seite, Interpreter mit BNF</li>
+	<li>Zimmer, Lesmana. Editor, TurtleCanvas, Men&uuml; etc.</li>
+</ul>
+
+<p>Verantwortlich f&uuml;r diese Seite im Sinne des <a href="http://www.teledienstgesetz.de/" target="_blank">Teledienstgesetztes</a>
+ist Tran, Minh Cuong. <!--Wir &uuml;bernehmen keine Haftung f&uuml;r externe Links.-->
+</p>
+
+<p>Wir &uuml;bernehmen keinerlei Haftung f&uuml;r das Nutzen/Nicht-Nutzen der Software.
+Die Software AdaLogo wird im <a href="http://www.gnu.de/gpl-ger.html">Sinne der GPL freigegeben</a>.
+Den Quellcode sowie eine Anleitung f&uuml;r die Benutzung findet man unter 
+<a href="reference.html">Reference</a>, <a href="userguide.html">Userguide</a>
+und <a href="download.html">Download</a>.
+</p>
+
+<p>Per Email sind wir zu erreichen unter thaihg*, tranmh*, oder zimmerla*. *Benutzername
+in der Informatik. Email-Adresse ergibt sich aus Benutzername angeh&auml;ngt mit 
+@studi.informatik.uni-stuttgart.de.
+</p>
+
+<p>F&uuml;r Diskussionen rund um Informatik an der Universit&auml;t Stuttgart allgemein, 
+sowie um AdaLogo speziell bitten wir das <a href="http://swt.uni-stuttgart.de/forum" target="_blank">Info-Forum</a> zu nutzen. 
+Dort schauen wir regelm&auml;&szlig;ig vorbei und werden Ihre Fragen gerne beantworten.
+</p>
+
+
+<br />
+<br />
+<br />
+<br />
+<!-- CONTENT END -->
+</div>
+ </div>
+ </form>
+ </body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+    spec="1.0+"
+    codebase="http://w3studi.informatik.uni-stuttgart.de/~tranmh/adalogo/"
+    <!-- codebase="http://localhost/adalogo_dev/" -->
+    href="adalogo.jnlp">
+    <information>
+        <title>AdaLogo</title>
+        <vendor>Informatik Uni Stuttgart</vendor>
+        <description>AdaLogo</description>
+        <homepage href="index.shtml"/>
+        <offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.4+"/>
+        <jar href="adalogo.jar"/>
+    </resources>
+    <application-desc main-class="adalogo.AdaLogo"/>
+</jnlp>
