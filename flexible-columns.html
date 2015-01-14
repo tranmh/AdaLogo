@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>AdaLogo</title>
+
+	<!-- Mobile viewport optimisation -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- (en) Add your meta data here -->
+	<!-- (de) Fuegen Sie hier ihre Meta-Daten ein -->
+	<meta name="Content-Language" content="de" />
+	<meta name="author" content="Minh Cuong Tran" /> 
+	<meta name="KeyWords" content="programming, ada, ada95, programmieren, uni stuttgart, informatik, adalogo" /> 
+	<meta name="Description" content="AdaLogo wurde im Rahmen des Softwarepraktikum an der
+	    Uni Stuttgart im SS 2005 erstellt. Ziel des Projektes war es, den Programmieranfaenger
+	    die Programmiersprache Ada ueber die Idee von 'Logo' nahe zu bringen." />
+
+	<link href="./css/flexible-columns.css" rel="stylesheet" type="text/css"/>
+	<!--[if lte IE 7]>
+	<link href="yaml/core/iehacks.css" rel="stylesheet" type="text/css" />
+	<![endif]-->
+
+	<!--[if lt IE 9]>
+	<script src="lib/html5shiv/html5shiv.js"></script>
+	<![endif]-->
+
+	<script src="AdaLogoStart.js"></script>
+	
+</head>
+<body>
+<ul class="ym-skiplinks">
+	<li><a class="ym-skip" href="#nav">Skip to navigation (Press Enter)</a></li>
+	<li><a class="ym-skip" href="#main">Skip to main content (Press Enter)</a></li>
+</ul>
+
+<div class="ym-wrapper">
+	<div class="ym-wbox">
+		<header>
+			<h1>AdaLogo</h1>
+		</header>
+		<nav id="nav">
+			<div class="ym-hlist" >
+				<ul>
+					<li class="active"><strong>Home</strong></li>
+					<li><a href="download.html">Download</a></li> 
+					<li><a href="reference.html">Reference</a></li>
+					<li><a href="userguide.html">UserGuide</a></li>
+					<li><a href="adalogoteam.html">AdaLogoTeam</a></li>
+					<li><a href="english.html">English</a></li>
+				</ul>
+				<!--
+				<form class="ym-searchform">
+					<input class="ym-searchfield" type="search" placeholder="Search..." />
+					<input class="ym-searchbutton" type="submit" value="Search" />
+				</form>
+				-->
+			</div>
+		</nav>
+		<main>
+			<div class="ym-column linearize-level-1">
+				<div class="ym-col1">
+					<div class="ym-cbox">
+						<section class="box info">
+<!-- CONTENT BEGIN -->
+
+ <h1>Home</h1> <!-- Hier sollte die Überschrift für die einzelne Seite rein. Auch sehr wichtig für Suchmaschinen. -->
+ <h2>Was ist AdaLogo?</h2> <!-- UnterÜberschriften werden von viele Suchmaschinen auch besonders beachtet. -->
+ <p><a href="javascript:AdaLogoStart();"><img src="img/turtle.jpg" alt="turtle" class="float-left" style="width: 101px; height: 69px;" /></a> <!-- Das alt="" Attribut sollte nicht fehlen, auch wenn es nur leer ist. Screenreader lesen ansonsten unnötig den Namen der Datei vor. -->
+
+     AdaLogo wurde im Rahmen eines Software-Praktikums im Sommersemester 2005 
+     an der Uni Stuttgart erstellt. Ziel der Software ist es den 
+     Studienanf&auml;ngern ohne oder mit wenigen Programmiervorkenntnissen 
+     die erste Programmiersprache Ada nahe zu bringen. Dabei verwendeten wir
+     das Prinzip "Logo". Anhand von wenigen Befehlen ist es bereits 
+     m&ouml;glich, einer Schildkr&ouml;te das Laufen beizubringen.
+     Spielend lernt man dabei die Syntax von Ada. Auf der 
+     Vorlesungsseite
+     Informatik I (Automatisierungstechnik in der Produktion) 
+     <a href="http://www.fmi.uni-stuttgart.de/fk/lehre/ws05-06/autip1/" target="_parent">
+     WS 05/06</a>, 
+     <a href="http://www.fmi.uni-stuttgart.de/fk/lehre/ws06-07/autip1/" target="_parent">
+     WS 06/07</a>
+     finden Sie Beispiele und Beispiel-Aufgaben in AdaLogo.
+     
+ </p>
+ <h2>Los geht's!</h2> <!-- UnterÜberschriften werden von viele Suchmaschinen auch besonders beachtet. -->
+ <p>
+     <a href="javascript:AdaLogoStart();"><img src="img/adalogowindow.jpg" class="float-left" style="width: 100px; height:79px;" ></a>
+     AdaLogo kann direkt vom Browser als <a href="javascript:AdaLogoStart();">Applet gestartet</a>
+     werden (ca. 
+	    
+        224KB).
+     Sie ben&ouml;tigen <a href="http://www.java.com/">Java (ab Version 1.4)</a>. 
+     <b>Stimmen Sie bitte dem Zertifikat zu</b>, damit Sie mit dem Applet Dateien 
+     speichern und laden k&ouml;nnen. Falls der Link zum AdaLogo starten nicht 
+     funktioniert, so benutzen Sie die unten genannte Alternative ohne Javascript.
+     Alternativen zum Applet sind:
+ </p>     
+<ul>
+ <li>
+	<a href="adalogo.jar">Download adalogo.jar</a> (ca. 
+	    
+        224KB) f&uuml;r
+	den Offline-Betrieb.
+	Falls Java bei Ihnen
+   installiert ist, f&uuml;hren Sie folgenden Befehl nach dem Download aus:
+   <i>java -jar adalogo.jar</i> . Bei Windows-Benutzer gen&uuml;gt es offensichtlich
+   ein Doppelklick auf die heruntergeladene Datei, falls Sie Java installiert haben.
+ </li>
+ <li>
+  <a href="adalogo.jnlp">Webstart mit AdaLogo</a>
+ </li>
+ <li>
+  <a href="adalogo.html" target="_blank">AdaLogo starten</a> <i>ohne</i> Javascript.
+ </li>
+</ul>
+
+<!--
+<p>
+Versionen von AdaLogo werden nach Datum herausgegeben. Falls beim Starten des
+Applets eine &auml;ltere Version erscheint als auf der Homepage angegeben,
+so liegt das am Cache Ihres Browsers. Abhilfe zu diesem Problem: l&ouml;schen
+Sie Ihr Cache. Mozilla/Firefox: Shift-Strg-R, Internet Explorer: Strg-F5, Opera: F5, 
+Safari: Cmd-Option-E, Konqueror: Strg-R.
+</p>
+-->
+
+ <h2>Und wie geht das?</h2>
+ <p><a href="howto.html"><img src="img/fragezeichen.gif" alt="fragezeichen howto" class="float-left" style="width: 77px; height: 99px;" /></a>
+  Ist ja alles sch&ouml;n und gut. Aber wie funktioniert 
+  die Sprache AdaLogo, die an die Ada-Syntax angelehnt ist?
+  Unter <a href="reference.html">Reference</a> wird alles erkl&auml;rt.
+  <br />
+  Hier ist au&szlig;erdem <a href="userguide.html">die Beschreibung des Programmes</a>.
+  Die Fehlermeldungen in der Konsole sind interessant, mit den Fehlermeldungen kann man sich auf die Suche nach
+  Fehler im Programm begeben. Um zu verfolgen, welche Variabel welchen Wert hat und wie die Schildkr&ouml;te
+  arbeitet, empfiehlt es sich das eigene
+  Programm mit "debug"/"single step" auszuf&uuml;hren. 
+ </p>
+ 
+ <h2>Screenshot, Quelltext und Dokumentation?</h2>
+ <p>Bekommen Sie unter <a href="download.html">Download</a>.</p>
+ 
+ 
+ <h2>Wer sind wir?</h2>
+ <p>Unter <a href="adalogoteam.html">AdaLogoTeam</a> erfahren Sie
+ wer wir sind. Dort sind auch Kontaktdaten hinterlegt, damit Sie mit
+ uns in Verbindung treten k&ouml;nnen. Wir freuen uns auf Ihr
+ Feedback.
+ </p>
+<!-- CONTENT END -->
+
+						</section>
+					</div>
+				</div>
+				<aside class="ym-col3">
+					<div class="ym-cbox">
+					
+  <dl id="subnav"> <!-- Diese Subnavigation kann vom Inhalt verändert werden. Sie wird nicht ausgedruckt. -->
+   <dt>
+        <button name="KlickmichAppletStart" type="button"
+        value="AdaLogoStart" onClick="javascript:AdaLogoStart();">
+        <b>AdaLogo &nbsp;starten&nbsp;&nbsp;</b>
+        </button>
+        <!--
+        <br />
+	<button name="KlickmichWebstart" type="button"
+	value="AdaLogoWebstart" onClick="javascript:AdaLogoWebStart();">
+	<b>AdaLogo Webstart</b>
+	</button>
+	-->
+    <br /><br />
+    <b>Wilkommen</b> auf der Seite von AdaLogo!
+    
+   </dt>
+    <dd>
+        Kontakt:
+   </dd>
+   <dd>
+	<img src="img/spamschutzbild_1.png" width="153" height="25" alt="mail an uns" />
+    </dd>
+    <dd>
+        <a href="adalogoteam.html" alt="Wir"><img src="img/team.jpg" alt="AdaLogoTeam" style="width: 120px; height: 108px;" /></a>
+    </dd>
+   <dt>
+        &copy; 
+        2015
+        <a href="adalogoteam.html">AdaLogoTeam</a> -- Layout based on <a href="http://www.yaml.de">YAML</a>
+
+   </dt>
+  </dl>
+
+
+  <h4>Aktuelles</h4>
+  <ul>
+    <li>21.10.2005 Programmaktualisierung</li>
+    <li>14.01.2015 Homepage&auml;nderung</li>
+  </ul>
+					</div>
+				</aside>
+			</div>
+		</main>
+		<!--
+		<footer>
+			<p>© AdaLogo 2015 &ndash; Layout based on <a href="http://www.yaml.de">YAML</a></p>
+		</footer>
+		-->
+	</div>
+</div>
+
+<!-- full skip link functionality in webkit browsers -->
+<script src="yaml/core/js/yaml-focusfix.js"></script>
+</body>
+</html>
